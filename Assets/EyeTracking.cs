@@ -58,11 +58,11 @@ public class EyeTracking : MonoBehaviour
         controlLocator.OnBumperDown.AddListener(HandleBumperDown);
 
         //shared head locator:
-       TransmissionObject headTransmissionObject = Transmission.Spawn("Cursor", Vector3.zero, Quaternion.identity, Vector3.one);
+       TransmissionObject headTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
         headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
-        TransmissionObject controlTransmissionObject = Transmission.Spawn("Cursor", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
