@@ -3174,7 +3174,13 @@ MonoBehaviour:
   OnLocalized:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1570679762 stripped
+--- !u!23 &1570679764 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1738202094222762950, guid: fb329c7237e55394da30653003113007,
+    type: 3}
+  m_PrefabInstance: {fileID: 1738202094405945490}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1570679765 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1738202094222762944, guid: fb329c7237e55394da30653003113007,
     type: 3}
@@ -3186,12 +3192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e4ca573ea962d940a0382fb4f56968d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!23 &1570679764 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1738202094222762950, guid: fb329c7237e55394da30653003113007,
-    type: 3}
-  m_PrefabInstance: {fileID: 1738202094405945490}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1587739372
 GameObject:
   m_ObjectHideFlags: 0
@@ -3524,8 +3524,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dist: 50
   MLCam: {fileID: 237370502}
-  camTest: {fileID: 0}
-  eyeTracking: {fileID: 1570679762}
+  camTest: {fileID: 237370495}
+  eyeTracking: {fileID: 1570679765}
 --- !u!1 &1871930866
 GameObject:
   m_ObjectHideFlags: 0
