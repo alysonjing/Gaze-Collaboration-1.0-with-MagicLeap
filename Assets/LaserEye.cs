@@ -5,12 +5,14 @@ using MagicLeapTools;
 using UnityEngine.UI;
 using UnityEngine.XR.MagicLeap;
 
-public class EyeTracking : MonoBehaviour
+public class LaserEye : MonoBehaviour
 {
 
     public GameObject Camera;
-    public MeshRenderer meshRenderer;
+    //public MeshRenderer meshRenderer;
     public Material startingC, changingC;
+    public Color startColor;
+    public Color endColor;
 
     Vector3 filterd = new Vector3();
     int bufferIndex = 0;
@@ -19,15 +21,11 @@ public class EyeTracking : MonoBehaviour
 
     [SerializeField]
     private Vector3 offsetRot;
-    //private Vector3 offsetPos;
     private Vector3 currPos;
-    private Camera mainCam;
-    private TextMesh MLdebugger;
 
     private Vector3 _heading;
-    public Color startColor;
-    public Color endColor;
-    //public LaserPointer lineRenderer;
+    private LineRenderer lineRenderer;
+
 
     private float t = 0;
     //public bool testLerp = false;
@@ -63,11 +61,11 @@ public class EyeTracking : MonoBehaviour
         controlLocator.OnBumperDown.AddListener(HandleBumperDown);
 
         //shared head locator:
-       TransmissionObject headTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject headTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
         headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
-        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject controlTransmissionObject = Transmission.Spawn("Cursor", Vector3.zero, Quaternion.identity, Vector3.one);
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
@@ -163,11 +161,14 @@ public class EyeTracking : MonoBehaviour
     void Start()
     {
         MLEyes.Start();
-        meshRenderer = gameObject.GetComponent<MeshRenderer>();
-        //transform.position = Camera.transform.position + Camera.transform.forward * 2.0f;
+        //meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        transform.position = Camera.transform.position + Camera.transform.forward * 2.0f;
 
-        //cursorInstance = Instantiate(cursorPrefab);
+        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.startColor = startColor;
+        lineRenderer.endColor = endColor;
     }
+
     private void OnDisable()
     {
         MLEyes.Stop();
@@ -185,35 +186,25 @@ public class EyeTracking : MonoBehaviour
         //original gaze script
         if (MLEyes.IsStarted)
         {
-            //original
-            //meshRenderer.transform.position = MLEyes.FixationPoint; 
-
-            //v1
-            //filterd = Vector3.Lerp(filterd, MLEyes.FixationPoint, 0.7f);
-            //gameObject.transform.position = filterd;
-            // oldPos = gameObject.transform.position;
-
             /***
              *
              * Raycast
              */
+            RaycastHit rayHit;
+            _heading = MLEyes.FixationPoint - Camera.transform.position;
 
-            //RaycastHit rayHit;
-            //_heading = MLEyes.FixationPoint - Camera.transform.position;
-
-
-            //if (Physics.Raycast(Camera.transform.position, _heading, out rayHit, 10.0f))
-            //{
-            //    lineRenderer.useWorldSpace = true;
-            //    lineRenderer.SetPosition(0, Camera.transform.position);
-            //    lineRenderer.SetPosition(1, rayHit.point);
-            //}
-            //else
-            //{
-            //    lineRenderer.useWorldSpace = false;
-            //    lineRenderer.SetPosition(0, Camera.transform.position);
-            //    lineRenderer.SetPosition(1, Vector3.forward * 5);
-            //}
+            if (Physics.Raycast(Camera.transform.position, _heading, out rayHit, 10.0f))
+            {
+                lineRenderer.useWorldSpace = true;
+                lineRenderer.SetPosition(0, Camera.transform.position);
+                lineRenderer.SetPosition(1, rayHit.point);
+            }
+            else
+            {
+                lineRenderer.useWorldSpace = false;
+                lineRenderer.SetPosition(0, Camera.transform.position);
+                lineRenderer.SetPosition(1, Vector3.forward * 5);
+            }
 
             //v2
             buffer[bufferIndex] = MLEyes.FixationPoint;
@@ -232,49 +223,32 @@ public class EyeTracking : MonoBehaviour
 
             //gaze pointer rotation offset
             gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
-            MLdebugger.text = MLEyes.FixationPoint + "\n" + currPos + "\n" + offsetRot + "\n"+ t + "\n";
 
-
-
-            
 
             Vector3 offset = MLEyes.FixationPoint - currPos;
             float offsetPos = offset.magnitude;
-/*          float x = Mathf.Abs(MLEyes.FixationPoint.x - currPos.x);
-            float y = Mathf.Abs(MLEyes.FixationPoint.y - currPos.y);
-            float z = Mathf.Abs(MLEyes.FixationPoint.z - currPos.z);
-            offsetPos = new Vector3(x, y, z);*/
+            /*          float x = Mathf.Abs(MLEyes.FixationPoint.x - currPos.x);
+                        float y = Mathf.Abs(MLEyes.FixationPoint.y - currPos.y);
+                        float z = Mathf.Abs(MLEyes.FixationPoint.z - currPos.z);
+                        offsetPos = new Vector3(x, y, z);*/
 
             if (offsetPos < 0.05)
             {
                 t += Time.deltaTime;
                 if (t > 3)
                 {
-                    meshRenderer.material = changingC;
-                }              
+                    lineRenderer.startColor = startColor;
+                }
             }
-            else {
-                meshRenderer.material = startingC;
+            else
+            {
+                lineRenderer.endColor = endColor;
                 t = 0;
             }
-
-
-
-            //V3
-            /*            sum2 -= buffer[bufferIndex]; // subtract the oldest value
-                        buffer[bufferIndex] = MLEyes.FixationPoint;
-                        sum2 += buffer[bufferIndex]; // add the newest value
-                        bufferIndex = (bufferIndex + 1) % 5;
-
-                        gameObject.transform.position = sum2 / 5;*/
 
 
 
         }
     }
     #endregion
-}
-
-public class LaserPointer
-{
 }

@@ -6,8 +6,8 @@ namespace MLToolsAndThings
 {
     public class LaserPointer : MonoBehaviour
     {
-
-        [SerializeField]
+        public Color startColor;
+        public Color endColor;
         private LineRenderer lineRenderer;
 
         // Startpoint of the laserpointer
@@ -21,6 +21,9 @@ namespace MLToolsAndThings
         private void Awake()
         {
             lineRenderer = GetComponent<LineRenderer>();
+            lineRenderer.startColor = startColor;
+            lineRenderer.endColor = endColor;
+
         }
 
         // Update is called once per frame

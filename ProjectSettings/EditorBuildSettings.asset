@@ -35,6 +35,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Gaze0501.unity
     guid: e5ce51522c0a9cc44a6869dfc2268d8c
+  - enabled: 1
+    path: Assets/Gaze0508.unity
+    guid: f4fdbde680713024b8199637b52cac81
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 2ba4dbd235ed941bb8fdb5a40ab00f22,
       type: 2}
