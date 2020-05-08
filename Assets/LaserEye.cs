@@ -9,7 +9,7 @@ public class LaserEye : MonoBehaviour
 {
 
     public GameObject Camera;
-    //public MeshRenderer meshRenderer;
+    public MeshRenderer meshRenderer;
     public Material startingC, changingC;
     public Color startColor;
     public Color endColor;
@@ -26,6 +26,8 @@ public class LaserEye : MonoBehaviour
     private Vector3 _heading;
     private LineRenderer lineRenderer;
 
+    public CylinderLaser cylinderLaser;
+
 
     private float t = 0;
     //public bool testLerp = false;
@@ -40,6 +42,8 @@ public class LaserEye : MonoBehaviour
 
     private List<TransmissionObject> _spawned = new List<TransmissionObject>();
     private string _initialInfo;
+
+    public Vector3 fixationPoint;
 
     /**
      * Playspace
@@ -61,11 +65,11 @@ public class LaserEye : MonoBehaviour
         controlLocator.OnBumperDown.AddListener(HandleBumperDown);
 
         //shared head locator:
-        TransmissionObject headTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject headTransmissionObject = Transmission.Spawn("Cursor", Vector3.zero, Quaternion.identity, Vector3.one);
         headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
-        TransmissionObject controlTransmissionObject = Transmission.Spawn("Cursor", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject controlTransmissionObject = Transmission.Spawn("Lazer", Vector3.zero, Quaternion.identity, Vector3.one);
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
@@ -161,7 +165,7 @@ public class LaserEye : MonoBehaviour
     void Start()
     {
         MLEyes.Start();
-        //meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        meshRenderer = gameObject.GetComponent<MeshRenderer>();
         transform.position = Camera.transform.position + Camera.transform.forward * 2.0f;
 
         lineRenderer = GetComponent<LineRenderer>();
@@ -192,9 +196,11 @@ public class LaserEye : MonoBehaviour
              */
             RaycastHit rayHit;
             _heading = MLEyes.FixationPoint - Camera.transform.position;
+            fixationPoint = MLEyes.FixationPoint;
 
             if (Physics.Raycast(Camera.transform.position, _heading, out rayHit, 10.0f))
             {
+
                 lineRenderer.useWorldSpace = true;
                 lineRenderer.SetPosition(0, Camera.transform.position);
                 lineRenderer.SetPosition(1, rayHit.point);

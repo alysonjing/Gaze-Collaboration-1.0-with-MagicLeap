@@ -20,7 +20,7 @@ public class EyeTracking : MonoBehaviour
     [SerializeField]
     private Vector3 offsetRot;
     //private Vector3 offsetPos;
-    private Vector3 currPos;
+    public Vector3 currPos;
     private Camera mainCam;
     private TextMesh MLdebugger;
 
