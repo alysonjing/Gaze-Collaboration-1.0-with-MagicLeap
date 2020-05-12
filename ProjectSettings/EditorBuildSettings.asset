@@ -6,38 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Archive/SpatialAlignment.unity
-    guid: fac4b138e1394e24682897ba10b711fd
-  - enabled: 0
-    path: Assets/Archive/Gaze0406.unity
-    guid: 6cb7f03d6cbd9e344ab1e88247b5c31a
-  - enabled: 0
-    path: Assets/Archive/Transmission.unity
-    guid: 7abaabf57c966fd4e997650f37bba93e
-  - enabled: 0
-    path: Assets/Scenes/HelloCube.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: Assets/MagicLeap-Tools/Examples/Playspace/Scenes/Playspace.unity
-    guid: d88cdd6c208270b469fec1a14c9aef08
-  - enabled: 0
     path: Assets/Archive/raycast.unity
     guid: 65cf2b33e21b2874faad95ddaae4df76
   - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 1
     path: Assets/GazeFixation0501Working.unity
     guid: 8057bb3c1ec73674f938eae956b2ff7b
   - enabled: 0
-    path: Assets/Archive/Gaze0319.unity
-    guid: cc0b50466a544164fa04d3beac439f3f
-  - enabled: 0
     path: Assets/Gaze0501.unity
     guid: e5ce51522c0a9cc44a6869dfc2268d8c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Gaze0508.unity
     guid: f4fdbde680713024b8199637b52cac81
+  - enabled: 1
+    path: Assets/Fixation0512.unity
+    guid: a77a7f34b7694f0448c84072ea57155b
   m_configObjects:
+    com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: ab6018ae838bdb54192f5be38546d5b3,
+      type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 2ba4dbd235ed941bb8fdb5a40ab00f22,
       type: 2}
