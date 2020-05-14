@@ -161,6 +161,7 @@ public class LaserEye : MonoBehaviour
             RaycastHit rayHit;
             _heading = MLEyes.FixationPoint - Camera.transform.position;
 
+
             if (Physics.Raycast(Camera.transform.position, _heading, out rayHit, 10.0f))
             {
                 //hit = rayHit.point;
