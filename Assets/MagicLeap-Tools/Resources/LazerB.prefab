@@ -11,14 +11,13 @@ GameObject:
   - component: {fileID: 2372548141128795873}
   - component: {fileID: 2372548141128795874}
   - component: {fileID: 9145247081681001195}
-  - component: {fileID: 5574527952312939332}
   m_Layer: 0
   m_Name: LaserPointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2372548141128795873
 Transform:
   m_ObjectHideFlags: 0
@@ -51,7 +50,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 62284da6c38c0884799bc77c39a1daf4, type: 2}
+  - {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -153,27 +152,3 @@ MonoBehaviour:
   localPosition: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0, w: 0}
   targetScale: {x: 0, y: 0, z: 0}
---- !u!114 &5574527952312939332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2372548141128795876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9da2b8d33223ec340b486c762e348421, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Camera: {fileID: 2372548141128795876}
-  meshRenderer: {fileID: 0}
-  startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
-  changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
-  startColor: {r: 0, g: 0.9616327, b: 1, a: 0}
-  endColor: {r: 0, g: 0.7149544, b: 1, a: 0}
-  offsetRot: {x: 0, y: 0, z: 0}
-  cylinderLaser: {fileID: 0}
-  smoothing: 10
-  controlLocator: {fileID: 0}
-  info: {fileID: 0}
-  fixationPoint: {x: 0, y: 0, z: 0}
