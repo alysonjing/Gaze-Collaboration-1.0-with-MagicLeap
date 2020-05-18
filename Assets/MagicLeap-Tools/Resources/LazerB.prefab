@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 2372548141128795873}
   - component: {fileID: 2372548141128795874}
   - component: {fileID: 9145247081681001195}
+  - component: {fileID: -3653408761573203205}
   m_Layer: 0
-  m_Name: LaserPointer
+  m_Name: LazerB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,3 +153,15 @@ MonoBehaviour:
   localPosition: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0, w: 0}
   targetScale: {x: 0, y: 0, z: 0}
+--- !u!114 &-3653408761573203205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2372548141128795876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c931eb3619f66e449daa78e1fe27969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
