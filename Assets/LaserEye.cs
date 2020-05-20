@@ -70,11 +70,11 @@ public class LaserEye : MonoBehaviour
         headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
-        TransmissionObject controlTransmissionObject = Transmission.Spawn("LazerB", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        TransmissionObject gazeTransmissionObject = Transmission.Spawn("LazerB", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject gazeTransmissionObject = Transmission.Spawn("Laser", Vector3.zero, Quaternion.identity, Vector3.one);
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
