@@ -9,22 +9,22 @@ EditorBuildSettings:
     path: Assets/Archive/raycast.unity
     guid: 65cf2b33e21b2874faad95ddaae4df76
   - enabled: 0
-    path: Assets/GazeFixation0501Working.unity
+    path: Assets/Archive/GazeFixation0501Working.unity
     guid: 8057bb3c1ec73674f938eae956b2ff7b
   - enabled: 0
-    path: Assets/Gaze0501.unity
+    path: Assets/Archive/Gaze0501.unity
     guid: e5ce51522c0a9cc44a6869dfc2268d8c
   - enabled: 0
-    path: Assets/Gaze0508.unity
+    path: Assets/Archive/Gaze0508.unity
     guid: f4fdbde680713024b8199637b52cac81
   - enabled: 0
-    path: Assets/Fixation0512.unity
+    path: Assets/Archive/Fixation0512.unity
     guid: a77a7f34b7694f0448c84072ea57155b
   - enabled: 0
-    path: Assets/Gaze0514.unity
+    path: Assets/Archive/Gaze0514.unity
     guid: 1e824d60a17693d4aa2f39f8c7c89543
   - enabled: 1
-    path: Assets/Gaze0520.unity
+    path: Assets/FixationCursor0521.unity
     guid: b13ad53b9e00c75418c0eab242fe2518
   m_configObjects:
     com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: ab6018ae838bdb54192f5be38546d5b3,
