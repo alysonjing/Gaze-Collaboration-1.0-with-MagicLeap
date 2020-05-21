@@ -25,9 +25,7 @@ public class EyeTracking : MonoBehaviour
     private TextMesh MLdebugger;
 
     private Vector3 _heading;
-    public Color startColor;
-    public Color endColor;
-    //public LaserPointer lineRenderer;
+
 
     private float t = 0;
     //public bool testLerp = false;
@@ -63,7 +61,7 @@ public class EyeTracking : MonoBehaviour
         controlLocator.OnBumperDown.AddListener(HandleBumperDown);
 
         //shared head locator:
-       TransmissionObject headTransmissionObject = Transmission.Spawn("Cursor", Vector3.zero, Quaternion.identity, Vector3.one);
+       TransmissionObject headTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
         headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
@@ -71,12 +69,9 @@ public class EyeTracking : MonoBehaviour
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        TransmissionObject gazeTransmissionObject = Transmission.Spawn("Cursor", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject gazeTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
         gazeTransmissionObject.motionSource = gameObject.transform;
 
-        //share gaze locatorv2: Not sure how to change?
-        //TransmissionObject gazeTransmissionObject = Transmission.Spawn("GazePoint", Vector3.zero, Quaternion.identity, Vector3.one);
-        //gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
         _initialInfo = info.text;
@@ -141,7 +136,6 @@ public class EyeTracking : MonoBehaviour
         //stamp a cube in space:
         TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObject", controlLocator.Position, controlLocator.Orientation, Vector3.one);
         _spawned.Add(spawn);
-        //spawn.transform.position = new Vector3(x, y, z);
 
     }
 
@@ -273,8 +267,4 @@ public class EyeTracking : MonoBehaviour
         }
     }
     #endregion
-}
-
-public class LaserPointer
-{
 }

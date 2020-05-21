@@ -20,9 +20,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Fixation0512.unity
     guid: a77a7f34b7694f0448c84072ea57155b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Gaze0514.unity
     guid: 1e824d60a17693d4aa2f39f8c7c89543
+  - enabled: 1
+    path: Assets/Gaze0520.unity
+    guid: b13ad53b9e00c75418c0eab242fe2518
   m_configObjects:
     com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: ab6018ae838bdb54192f5be38546d5b3,
       type: 2}
