@@ -5,10 +5,11 @@ using MagicLeapTools;
 using UnityEngine.UI;
 using UnityEngine.XR.MagicLeap;
 
-public class EyeTracking : MonoBehaviour
+public class Raycast : MonoBehaviour
 {
 
     public GameObject Camera;
+    public GameObject cursor;
     public MeshRenderer meshRenderer;
     public Material startingC, changingC, mutual;
 
@@ -159,7 +160,7 @@ public class EyeTracking : MonoBehaviour
     {
         MLEyes.Start();
         meshRenderer = gameObject.GetComponent<MeshRenderer>();
-        //transform.position = Camera.transform.position + Camera.transform.forward * 2.0f;
+        transform.position = Camera.transform.position + Camera.transform.forward * 2.0f;
 
         //cursorInstance = Instantiate(cursorPrefab);
 
@@ -188,6 +189,26 @@ public class EyeTracking : MonoBehaviour
             //gameObject.transform.position = filterd;
             // oldPos = gameObject.transform.position;
 
+            /***
+             *
+             * Raycast
+             */
+
+            RaycastHit rayHit;
+            _heading = MLEyes.FixationPoint - Camera.transform.position;
+
+            if (Physics.Raycast(Camera.transform.position, _heading, out rayHit, 10.0f))
+            {
+                //gameObject.transform.position = rayHit.transform.position;
+                //gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
+
+
+            }
+            else
+            {
+
+            }
+
 
             //v2
             buffer[bufferIndex] = MLEyes.FixationPoint;
@@ -199,10 +220,11 @@ public class EyeTracking : MonoBehaviour
                 sum += buffer[i];
             }
             currPos = sum / 5;
-            gameObject.transform.position = Vector3.MoveTowards(transform.position, currPos, smoothing * Time.deltaTime);
-
+            // gameObject.transform.position = currPos;
+            //gameObject.transform.position = Vector3.MoveTowards(transform.position, currPos, smoothing * Time.deltaTime);
+            //transform.position = Vector3.MoveTowards(transform.position, MLEyes.FixationPoint, smoothing * Time.deltaTime);
             //gaze pointer rotation offset
-            gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
+            //gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
             //MLdebugger.text = MLEyes.FixationPoint + "\n" + currPos + "\n" + offsetRot + "\n"+ t + "\n";
 
             Vector3 offset = MLEyes.FixationPoint - currPos;
@@ -214,15 +236,15 @@ public class EyeTracking : MonoBehaviour
                 if (t > 3)
                 {
                     //meshRenderer.material = mutual;
-                    //gazeTransmissionObject.Despawn();
-                    //gazeTransmissionObject = Transmission.Spawn("CursorM", Vector3.zero, Quaternion.identity, Vector3.one);
-                    //gazeTransmissionObject.motionSource = gameObject.transform;
+                    gazeTransmissionObject.Despawn();
+                    gazeTransmissionObject = Transmission.Spawn("CursorM", Vector3.zero, Quaternion.identity, Vector3.one);
+                    gazeTransmissionObject.motionSource = gameObject.transform;
                 }              
             }
             else {
                 //meshRenderer.material = startingC;
                 t = 0;
-                //gazeTransmissionObject.Despawn();
+                gazeTransmissionObject.Despawn();
             }
 
 

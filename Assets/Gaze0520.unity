@@ -3697,6 +3697,11 @@ PrefabInstance:
       propertyPath: ceilingPlaque
       value: 
       objectReference: {fileID: 84747594}
+    - target: {fileID: 1738202094222762944, guid: fb329c7237e55394da30653003113007,
+        type: 3}
+      propertyPath: mutual
+      value: 
+      objectReference: {fileID: 2100000, guid: c02829c7bf537f048978406827f59fda, type: 2}
     - target: {fileID: 1738202094222762947, guid: fb329c7237e55394da30653003113007,
         type: 3}
       propertyPath: m_Name
