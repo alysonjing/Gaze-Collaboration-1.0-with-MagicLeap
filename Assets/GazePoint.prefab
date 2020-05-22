@@ -56,6 +56,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -100,7 +101,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1738202094222762947}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e4ca573ea962d940a0382fb4f56968d, type: 3}
   m_Name: 
@@ -109,8 +110,9 @@ MonoBehaviour:
   meshRenderer: {fileID: 1738202094222762950}
   startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
   changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
+  mutual: {fileID: 0}
   offsetRot: {x: 0, y: 0, z: 0}
-  offsetPos: {x: 0, y: 0, z: 0}
-  mainCam: {fileID: 0}
-  MLdebugger: {fileID: 0}
-  testLerp: 1
+  currPos: {x: 0, y: 0, z: 0}
+  smoothing: 10
+  controlLocator: {fileID: 0}
+  info: {fileID: 0}

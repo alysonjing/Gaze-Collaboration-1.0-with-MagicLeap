@@ -3054,15 +3054,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f95547ca9694f8d4e97013c53e8b6c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 237370495}
+  camTransform: {fileID: 237370502}
   cursor: {fileID: 1570679759}
   meshRenderer: {fileID: 1570679763}
   startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
   changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
   mutual: {fileID: 2100000, guid: c02829c7bf537f048978406827f59fda, type: 2}
+  smoothing: 10
   offsetRot: {x: 0, y: 0, z: 0}
   currPos: {x: 0, y: 0, z: 0}
-  smoothing: 10
   controlLocator: {fileID: 1452557662}
   info: {fileID: 1845416827}
 --- !u!23 &1570679763 stripped

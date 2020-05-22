@@ -8,30 +8,21 @@ using UnityEngine.XR.MagicLeap;
 public class Raycast : MonoBehaviour
 {
 
-    public GameObject Camera;
+    public Transform camTransform;
     public GameObject cursor;
-    public MeshRenderer meshRenderer;
-    public Material startingC, changingC, mutual;
+    //public MeshRenderer meshRenderer;
+    //public Material startingC, changingC, mutual;
+    //public float smoothing = 10;
 
-    Vector3 filterd = new Vector3();
-    int bufferIndex = 0;
-    Vector3[] buffer = new Vector3[5];
-    Vector3 sum2 = Vector3.zero;
 
-    [SerializeField]
+    private MLRaycast.QueryParams _raycastParams = new MLRaycast.QueryParams();
+    private Vector3 rotation;
     private Vector3 offsetRot;
-    //private Vector3 offsetPos;
-    public Vector3 currPos;
-    private Camera mainCam;
-    private TextMesh MLdebugger;
-
-    private Vector3 _heading;
-
-
-    private float t = 0;
-    //public bool testLerp = false;
-    public float smoothing = 10;
-
+   // public Vector3 currPos;
+    //private Camera mainCam;
+    //private TextMesh MLdebugger;
+    //private Vector3 _heading;
+    //private float t = 0;
     TransmissionObject gazeTransmissionObject;
 
     /***
@@ -44,17 +35,6 @@ public class Raycast : MonoBehaviour
     private List<TransmissionObject> _spawned = new List<TransmissionObject>();
     private string _initialInfo;
 
-    /**
-     * Playspace
-     * **/
-    //Public Variables:
-    //public Transform primaryWallPlaque;
-    //public Transform rearWallPlaque;
-    //public Transform rightWallPlaque;
-    //public Transform leftWallPlaque;
-    //public Transform centerPlaque;
-    //public Transform floorPlaque;
-    //public Transform ceilingPlaque;
 
     //spacial alignment Init:
     private void Awake()
@@ -64,73 +44,21 @@ public class Raycast : MonoBehaviour
         controlLocator.OnBumperDown.AddListener(HandleBumperDown);
 
         //shared head locator:
-       TransmissionObject headTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
-        headTransmissionObject.motionSource = Camera.transform;
+       //TransmissionObject headTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
+        //headTransmissionObject.motionSource = cursor.transform;
 
         //shared controll locator:
         TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        gazeTransmissionObject = Transmission.Spawn("Cursor", Vector3.zero, Quaternion.identity, Vector3.one);
+        gazeTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
         _initialInfo = info.text;
 
-        /**
-         * PlaySpace
-         * **/
-        //hooks:
-        //Playspace.Instance.OnCleared.AddListener(HandleCleared);
-        //Playspace.Instance.OnCompleted.AddListener(HandleCompleted);
     }
-
-    //private void HandleCleared()
-    //{
-    //    primaryWallPlaque.gameObject.SetActive(false);
-    //    rearWallPlaque.gameObject.SetActive(false);
-    //    rightWallPlaque.gameObject.SetActive(false);
-    //    leftWallPlaque.gameObject.SetActive(false);
-    //    ceilingPlaque.gameObject.SetActive(false);
-    //    floorPlaque.gameObject.SetActive(false);
-    //    centerPlaque.gameObject.SetActive(false);
-    //}
-
-    //private void HandleCompleted()
-    //{
-    //    //place plaques:
-    //    PlayspaceWall primaryWall = Playspace.Instance.Walls[Playspace.Instance.PrimaryWall];
-    //    primaryWallPlaque.gameObject.SetActive(true);
-    //    primaryWallPlaque.position = primaryWall.Center + Vector3.up * .5f;
-    //    primaryWallPlaque.rotation = Quaternion.LookRotation(primaryWall.Back);
-
-    //    PlayspaceWall rearWall = Playspace.Instance.Walls[Playspace.Instance.RearWall];
-    //    rearWallPlaque.gameObject.SetActive(true);
-    //    rearWallPlaque.position = rearWall.Center + Vector3.up * .5f;
-    //    rearWallPlaque.rotation = Quaternion.LookRotation(rearWall.Back);
-
-    //    PlayspaceWall rightWall = Playspace.Instance.Walls[Playspace.Instance.RightWall];
-    //    rightWallPlaque.gameObject.SetActive(true);
-    //    rightWallPlaque.position = rightWall.Center + Vector3.up * .5f;
-    //    rightWallPlaque.rotation = Quaternion.LookRotation(rightWall.Back);
-
-    //    PlayspaceWall leftWall = Playspace.Instance.Walls[Playspace.Instance.LeftWall];
-    //    leftWallPlaque.gameObject.SetActive(true);
-    //    leftWallPlaque.position = leftWall.Center + Vector3.up * .5f;
-    //    leftWallPlaque.rotation = Quaternion.LookRotation(leftWall.Back);
-
-    //    ceilingPlaque.gameObject.SetActive(true);
-    //    ceilingPlaque.position = Playspace.Instance.CeilingCenter;
-    //    ceilingPlaque.rotation = Quaternion.LookRotation(Vector3.up, primaryWall.Forward);
-
-    //    floorPlaque.gameObject.SetActive(true);
-    //    floorPlaque.position = Playspace.Instance.FloorCenter;
-    //    floorPlaque.rotation = Quaternion.LookRotation(Vector3.down, primaryWall.Back);
-
-    //    centerPlaque.gameObject.SetActive(true);
-    //    centerPlaque.position = Playspace.Instance.Center;
-    //}
 
     //Event Handlers:
     private void HandleTriggerDown()
@@ -153,23 +81,23 @@ public class Raycast : MonoBehaviour
     }
 
 
-
-
     #region Unity Methods
     void Start()
     {
-        MLEyes.Start();
-        meshRenderer = gameObject.GetComponent<MeshRenderer>();
-        transform.position = Camera.transform.position + Camera.transform.forward * 2.0f;
+        MLRaycast.Start();
+        //meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        //transform.position = cursor.transform.position + cursor.transform.forward * 2.0f;
 
         //cursorInstance = Instantiate(cursorPrefab);
-
-
     }
-    private void OnDisable()
+
+
+    private void OnDestroy()
     {
-        MLEyes.Stop();
+        // Stop raycasting.
+        MLRaycast.Stop();
     }
+
     void Update()
     {
         //Spatial alignment
@@ -180,86 +108,82 @@ public class Raycast : MonoBehaviour
         info.text = output;
         //end 
 
-        //original gaze script
-        if (MLEyes.IsStarted)
-        {
 
-            //v1
-            //filterd = Vector3.Lerp(filterd, MLEyes.FixationPoint, 0.7f);
-            //gameObject.transform.position = filterd;
-            // oldPos = gameObject.transform.position;
+        // Update the orientation data in the raycast parameters.
+        _raycastParams.Position = camTransform.position;
+        _raycastParams.Direction = camTransform.forward;
+        _raycastParams.UpVector = camTransform.up;
+        //_raycastParams.Rotation = camTransform.rotation;
 
-            /***
-             *
-             * Raycast
-             */
+        // Make a raycast request using the raycast parameters 
+        MLRaycast.Raycast(_raycastParams, HandleOnReceiveRaycast);
 
-            RaycastHit rayHit;
-            _heading = MLEyes.FixationPoint - Camera.transform.position;
+        /***
+         *
+         * Raycast
+         */
 
-            if (Physics.Raycast(Camera.transform.position, _heading, out rayHit, 10.0f))
-            {
-                //gameObject.transform.position = rayHit.transform.position;
-                //gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
+        //RaycastHit rayHit;
+        //    _heading = MLEyes.FixationPoint - Camera.transform.position;
 
-
-            }
-            else
-            {
-
-            }
+        //    if (Physics.Raycast(Camera.transform.position, _heading, out rayHit, 10.0f))
+        //    {
+        //        gameObject.transform.position = rayHit.transform.position;
+        //        gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
 
 
-            //v2
-            buffer[bufferIndex] = MLEyes.FixationPoint;
-            bufferIndex = (bufferIndex + 1) % 5;
+        //    }
+        //    else
+        //    {
 
-            Vector3 sum = Vector3.zero;
-            for (int i = 0; i < 5; i++)
-            {
-                sum += buffer[i];
-            }
-            currPos = sum / 5;
-            // gameObject.transform.position = currPos;
+        //    }
+
+
             //gameObject.transform.position = Vector3.MoveTowards(transform.position, currPos, smoothing * Time.deltaTime);
-            //transform.position = Vector3.MoveTowards(transform.position, MLEyes.FixationPoint, smoothing * Time.deltaTime);
-            //gaze pointer rotation offset
+
+
             //gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
             //MLdebugger.text = MLEyes.FixationPoint + "\n" + currPos + "\n" + offsetRot + "\n"+ t + "\n";
 
-            Vector3 offset = MLEyes.FixationPoint - currPos;
-            float offsetPos = offset.magnitude;
+            //Vector3 offset = MLEyes.FixationPoint - currPos;
+            //float offsetPos = offset.magnitude;
 
-            if (offsetPos < 0.05)
-            {
-                t += Time.deltaTime;
-                if (t > 3)
-                {
+            //if (offsetPos < 0.05)
+            //{
+               // t += Time.deltaTime;
+                //if (t > 3)
+               // {
                     //meshRenderer.material = mutual;
-                    gazeTransmissionObject.Despawn();
-                    gazeTransmissionObject = Transmission.Spawn("CursorM", Vector3.zero, Quaternion.identity, Vector3.one);
-                    gazeTransmissionObject.motionSource = gameObject.transform;
-                }              
-            }
-            else {
+
+                //}              
+           // }
+           // else {
                 //meshRenderer.material = startingC;
-                t = 0;
-                gazeTransmissionObject.Despawn();
-            }
 
-
-
-            //V3
-            /*            sum2 -= buffer[bufferIndex]; // subtract the oldest value
-                        buffer[bufferIndex] = MLEyes.FixationPoint;
-                        sum2 += buffer[bufferIndex]; // add the newest value
-                        bufferIndex = (bufferIndex + 1) % 5;
-
-                        gameObject.transform.position = sum2 / 5;*/
-
-
-
-        }
+            //}
     }
     #endregion
+    private IEnumerator NormalMarker(Vector3 point, Vector3 normal)
+    {
+        // Rotate the prefab to match given normal.
+        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, normal);
+        //rotation.eulerAngles = Camera.transform.eulerAngles + offsetRot; //test offset rotation: AJ->did nont work
+        //gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
+
+        // Instantiate the prefab at the given point.
+        GameObject go = Instantiate(cursor, point, rotation);
+        // Wait 2 seconds then destroy the prefab.
+        yield return new WaitForSeconds(0);
+        Destroy(go);
+    }
+
+    void HandleOnReceiveRaycast(MLRaycast.ResultState state,
+                                UnityEngine.Vector3 point, Vector3 normal,
+                                float confidence)
+    {
+        if (state == MLRaycast.ResultState.HitObserved)
+        {
+            StartCoroutine(NormalMarker(point, normal));
+        }
+    }
 }

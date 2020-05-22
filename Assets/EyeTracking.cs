@@ -71,7 +71,7 @@ public class EyeTracking : MonoBehaviour
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        gazeTransmissionObject = Transmission.Spawn("Cursor", Vector3.zero, Quaternion.identity, Vector3.one);
+        gazeTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
@@ -213,14 +213,14 @@ public class EyeTracking : MonoBehaviour
                 t += Time.deltaTime;
                 if (t > 3)
                 {
-                    //meshRenderer.material = mutual;
+                    meshRenderer.material = mutual;
                     //gazeTransmissionObject.Despawn();
                     //gazeTransmissionObject = Transmission.Spawn("CursorM", Vector3.zero, Quaternion.identity, Vector3.one);
                     //gazeTransmissionObject.motionSource = gameObject.transform;
                 }              
             }
             else {
-                //meshRenderer.material = startingC;
+                meshRenderer.material = startingC;
                 t = 0;
                 //gazeTransmissionObject.Despawn();
             }
