@@ -26,9 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/FixationCursor0521.unity
     guid: b13ad53b9e00c75418c0eab242fe2518
-  - enabled: 0
-    path: Assets/RaycastCursor0521.unity
-    guid: 537374444229daf4787e6b13db9b0155
   m_configObjects:
     com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: ab6018ae838bdb54192f5be38546d5b3,
       type: 2}
