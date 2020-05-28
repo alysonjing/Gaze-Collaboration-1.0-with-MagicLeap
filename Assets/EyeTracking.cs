@@ -46,7 +46,7 @@ public class EyeTracking : MonoBehaviour
     /**
      * Playspace
      * **/
-    //Public Variables:
+    ////Public Variables:
     //public Transform primaryWallPlaque;
     //public Transform rearWallPlaque;
     //public Transform rightWallPlaque;
@@ -67,11 +67,11 @@ public class EyeTracking : MonoBehaviour
         headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
-        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
-        controlTransmissionObject.motionSource = controlLocator.transform;
+        //TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
+        //controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        gazeTransmissionObject = Transmission.Spawn("Cursor", Vector3.zero, Quaternion.identity, Vector3.one);
+        gazeTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
@@ -203,7 +203,7 @@ public class EyeTracking : MonoBehaviour
 
             //gaze pointer rotation offset
             gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
-            //MLdebugger.text = MLEyes.FixationPoint + "\n" + currPos + "\n" + offsetRot + "\n"+ t + "\n";
+            MLdebugger.text = MLEyes.FixationPoint + "\n" + currPos + "\n" + offsetRot + "\n"+ t + "\n";
 
             Vector3 offset = MLEyes.FixationPoint - currPos;
             float offsetPos = offset.magnitude;

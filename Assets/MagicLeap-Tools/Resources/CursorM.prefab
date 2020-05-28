@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8506158093999348553}
   - component: {fileID: 217925906538496950}
   m_Layer: 0
-  m_Name: CursorB 1
+  m_Name: CursorM
   m_TagString: gazePointer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

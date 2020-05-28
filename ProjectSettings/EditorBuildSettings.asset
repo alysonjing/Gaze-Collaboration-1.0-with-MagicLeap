@@ -26,8 +26,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/FixationCursor0521.unity
     guid: b13ad53b9e00c75418c0eab242fe2518
+  - enabled: 0
+    path: Assets/Archive/SpatialAlignment.unity
+    guid: fac4b138e1394e24682897ba10b711fd
+  - enabled: 0
+    path: Assets/MagicLeap/Examples/Intermediate/Scenes/PersistentCoordinateFrames.unity
+    guid: e79870b2eb36346328264d71a965cd0a
   m_configObjects:
-    com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: ab6018ae838bdb54192f5be38546d5b3,
+    com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: dd8a8339358d37148b5d9ab394102238,
       type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 2ba4dbd235ed941bb8fdb5a40ab00f22,
       type: 2}
