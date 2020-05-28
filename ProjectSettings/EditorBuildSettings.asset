@@ -5,33 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Archive/raycast.unity
-    guid: 65cf2b33e21b2874faad95ddaae4df76
-  - enabled: 0
-    path: Assets/Archive/GazeFixation0501Working.unity
-    guid: 8057bb3c1ec73674f938eae956b2ff7b
-  - enabled: 0
-    path: Assets/Archive/Gaze0501.unity
-    guid: e5ce51522c0a9cc44a6869dfc2268d8c
-  - enabled: 0
-    path: Assets/Archive/Gaze0508.unity
-    guid: f4fdbde680713024b8199637b52cac81
-  - enabled: 0
-    path: Assets/Archive/Fixation0512.unity
-    guid: a77a7f34b7694f0448c84072ea57155b
-  - enabled: 0
-    path: Assets/Archive/Gaze0514.unity
-    guid: 1e824d60a17693d4aa2f39f8c7c89543
   - enabled: 1
+    path: Assets/LazerGaze.unity
+    guid: 1e824d60a17693d4aa2f39f8c7c89543
+  - enabled: 0
     path: Assets/FixationCursor0521.unity
     guid: b13ad53b9e00c75418c0eab242fe2518
   - enabled: 0
-    path: Assets/Archive/SpatialAlignment.unity
-    guid: fac4b138e1394e24682897ba10b711fd
-  - enabled: 0
-    path: Assets/MagicLeap/Examples/Intermediate/Scenes/PersistentCoordinateFrames.unity
-    guid: e79870b2eb36346328264d71a965cd0a
+    path: Assets/RaycastCursor0521.unity
+    guid: 537374444229daf4787e6b13db9b0155
   m_configObjects:
     com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: dd8a8339358d37148b5d9ab394102238,
       type: 2}

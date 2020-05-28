@@ -3055,7 +3055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 237370495}
-  cursor: {fileID: 1570679759}
+  cursor: {fileID: 1738202094222762947, guid: fb329c7237e55394da30653003113007, type: 3}
   meshRenderer: {fileID: 1570679763}
   startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
   changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
