@@ -32,7 +32,7 @@ public class Raycast : MonoBehaviour
     //public bool testLerp = false;
     public float smoothing = 10;
 
-    TransmissionObject gazeTransmissionObject;
+    public TransmissionObject gazeTransmissionObject;
 
     /***
      * spatial alignment
@@ -62,7 +62,7 @@ public class Raycast : MonoBehaviour
 
         //share gaze locator: Not sure how to change?
         gazeTransmissionObject = Transmission.Spawn("Cursor", Vector3.zero, Quaternion.identity, Vector3.one);
-        gazeTransmissionObject.motionSource = gameObject.transform;
+        //gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
         _initialInfo = info.text;
@@ -97,7 +97,7 @@ public class Raycast : MonoBehaviour
     #region Unity Methods
     void Start()
     {
-        MLEyes.Start();
+        //MLEyes.Start();
         meshRenderer = gameObject.GetComponent<MeshRenderer>();
         //transform.position = Camera.transform.position + Camera.transform.forward * 2.0f;
 
@@ -107,14 +107,16 @@ public class Raycast : MonoBehaviour
     }
     private void OnDisable()
     {
-        MLEyes.Stop();
+        //MLEyes.Stop();
     }
+    private Vector3 hitpoint;
     void Update()
     {
         //Spatial alignment
         string output = _initialInfo + System.Environment.NewLine;
         output += "Peers Available: " + Transmission.Instance.Peers.Length + System.Environment.NewLine;
-        output += "Localized: " + SpatialAlignment.Localized;
+        output += "Localized: " + SpatialAlignment.Localized + System.Environment.NewLine;
+        output += "Hitpoint: " + hitpoint + "pos" + gazeTransmissionObject.transform.position + " | " + gazeTransmissionObject.gameObject.activeInHierarchy;
 
         info.text = output;
 
@@ -125,13 +127,19 @@ public class Raycast : MonoBehaviour
 
         RaycastHit rayHit;
         //_heading = MLEyes.FixationPoint - Camera.transform.position;
-
-        if (Physics.Raycast(Camera.transform.position, transform.forward, out rayHit))
+        //if (Physics.Raycast(Camera.transform.position, transform.forward, out rayHit))
+        Debug.Log("here..");
+        if (Physics.Raycast(Camera.transform.position, Camera.transform.forward, out rayHit))
         {
-            //gameObject.transform.position = rayHit.point;
-            //gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
-            //gameObject.transform.rotation = Quaternion.Euler(rayHit.normal);
-            GameObject headgaze = Instantiate(cursor, rayHit.point, Quaternion.Euler(rayHit.normal));
+            Debug.Log("ray hitting:" + rayHit.point + " , hit:" + rayHit.transform.gameObject);
+            Debug.DrawRay(Camera.transform.position, Camera.transform.forward, Color.red);
+            hitpoint = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z- 0.025f);
+            gazeTransmissionObject.transform.position = hitpoint;
+            //cursor.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
+            //gazeTransmissionObject.transform.rotation = Quaternion.Euler(rayHit.normal);
+            gazeTransmissionObject.transform.rotation = Camera.transform.rotation;
+            //GameObject headgaze = Instantiate(cursor, rayHit.point, Quaternion.Euler(rayHit.normal));
+            //gazeTransmissionObject.motionSource = gameObject.transform;
         }
         //end 
 
@@ -139,16 +147,16 @@ public class Raycast : MonoBehaviour
         //if (MLEyes.IsStarted)
         //{
 
-            //v1
-            //filterd = Vector3.Lerp(filterd, MLEyes.FixationPoint, 0.7f);
-            //gameObject.transform.position = filterd;
-            // oldPos = gameObject.transform.position;
+        //v1
+        //filterd = Vector3.Lerp(filterd, MLEyes.FixationPoint, 0.7f);
+        //gameObject.transform.position = filterd;
+        // oldPos = gameObject.transform.position;
 
 
 
 
-            //v2
-            buffer[bufferIndex] = MLEyes.FixationPoint;
+        //v2
+        buffer[bufferIndex] = MLEyes.FixationPoint;
             bufferIndex = (bufferIndex + 1) % 5;
 
             Vector3 sum = Vector3.zero;
@@ -173,15 +181,15 @@ public class Raycast : MonoBehaviour
                 if (t > 3)
                 {
                     //meshRenderer.material = mutual;
-                    gazeTransmissionObject.Despawn();
-                    gazeTransmissionObject = Transmission.Spawn("CursorM", Vector3.zero, Quaternion.identity, Vector3.one);
-                    gazeTransmissionObject.motionSource = gameObject.transform;
+                    //gazeTransmissionObject.Despawn();
+                    //gazeTransmissionObject = Transmission.Spawn("CursorM", Vector3.zero, Quaternion.identity, Vector3.one);
+                    //gazeTransmissionObject.motionSource = gameObject.transform;
                 }              
             }
             else {
                 //meshRenderer.material = startingC;
-                t = 0;
-                gazeTransmissionObject.Despawn();
+                //t = 0;
+                //gazeTransmissionObject.Despawn();
             }
 
 
