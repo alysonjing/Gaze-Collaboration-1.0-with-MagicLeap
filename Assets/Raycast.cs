@@ -53,7 +53,7 @@ public class Raycast : MonoBehaviour
         controlLocator.OnBumperDown.AddListener(HandleBumperDown);
 
         //shared head locator:
-       TransmissionObject headTransmissionObject = Transmission.Spawn("Cursor", Vector3.zero, Quaternion.identity, Vector3.one);
+       TransmissionObject headTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
        headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
@@ -61,7 +61,7 @@ public class Raycast : MonoBehaviour
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        gazeTransmissionObject = Transmission.Spawn("Cursor", Vector3.zero, Quaternion.identity, Vector3.one);
+        gazeTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
@@ -134,10 +134,12 @@ public class Raycast : MonoBehaviour
             Debug.Log("ray hitting:" + rayHit.point + " , hit:" + rayHit.transform.gameObject);
             Debug.DrawRay(Camera.transform.position, Camera.transform.forward, Color.red);
             hitpoint = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z- 0.025f);
-            gazeTransmissionObject.transform.position = hitpoint;
+            //gazeTransmissionObject.transform.position = hitpoint;
+            gameObject.transform.position = hitpoint;
             //cursor.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
             //gazeTransmissionObject.transform.rotation = Quaternion.Euler(rayHit.normal);
-            gazeTransmissionObject.transform.rotation = Camera.transform.rotation;
+            //gazeTransmissionObject.transform.rotation = Camera.transform.rotation;
+            gameObject.transform.rotation = Camera.transform.rotation;
             //GameObject headgaze = Instantiate(cursor, rayHit.point, Quaternion.Euler(rayHit.normal));
             //gazeTransmissionObject.motionSource = gameObject.transform;
         }
