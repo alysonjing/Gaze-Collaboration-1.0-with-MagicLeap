@@ -54,15 +54,15 @@ public class Raycast : MonoBehaviour
 
         //shared head locator:
        TransmissionObject headTransmissionObject = Transmission.Spawn("Cursor", Vector3.zero, Quaternion.identity, Vector3.one);
-        headTransmissionObject.motionSource = Camera.transform;
+       headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
-        //TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
-        //controlTransmissionObject.motionSource = controlLocator.transform;
+        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
+        controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
         gazeTransmissionObject = Transmission.Spawn("Cursor", Vector3.zero, Quaternion.identity, Vector3.one);
-        //gazeTransmissionObject.motionSource = gameObject.transform;
+        gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
         _initialInfo = info.text;
@@ -116,7 +116,7 @@ public class Raycast : MonoBehaviour
         string output = _initialInfo + System.Environment.NewLine;
         output += "Peers Available: " + Transmission.Instance.Peers.Length + System.Environment.NewLine;
         output += "Localized: " + SpatialAlignment.Localized + System.Environment.NewLine;
-        output += "Hitpoint: " + hitpoint + "pos" + gazeTransmissionObject.transform.position + " | " + gazeTransmissionObject.gameObject.activeInHierarchy;
+        //output += "Hitpoint: " + hitpoint + "pos" + gazeTransmissionObject.transform.position + " | " + gazeTransmissionObject.gameObject.activeInHierarchy;
 
         info.text = output;
 
