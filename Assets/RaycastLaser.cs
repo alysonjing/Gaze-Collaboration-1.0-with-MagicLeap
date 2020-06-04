@@ -5,12 +5,10 @@ using MagicLeapTools;
 using UnityEngine.UI;
 using UnityEngine.XR.MagicLeap;
 
-public class LaserEye : MonoBehaviour
+public class RaycastLaser : MonoBehaviour
 {
 
     public GameObject Camera;
-    //public MeshRenderer meshRenderer;
-    //public Material startingC, changingC;
     public Color startColor;
     public Color endColor;
 
@@ -22,11 +20,8 @@ public class LaserEye : MonoBehaviour
     [SerializeField]
     private Vector3 offsetRot;
     private Vector3 currPos;
-
     private Vector3 _heading;
     private LineRenderer lineRenderer;
-
-    //public CylinderLaser cylinderLaser;
 
 
     private float t = 0;
@@ -44,19 +39,7 @@ public class LaserEye : MonoBehaviour
     private List<TransmissionObject> _spawned = new List<TransmissionObject>();
     private string _initialInfo;
 
-    public Vector3 fixationPoint;
-
-    /**
-     * Playspace
-     * **/
-    //Public Variables:
-    //public Transform primaryWallPlaque;
-    //public Transform rearWallPlaque;
-    //public Transform rightWallPlaque;
-    //public Transform leftWallPlaque;
-    //public Transform centerPlaque;
-    //public Transform floorPlaque;
-    //public Transform ceilingPlaque;
+    //public Vector3 fixationPoint;
 
     //spacial alignment Init:
     private void Awake()
@@ -110,7 +93,7 @@ public class LaserEye : MonoBehaviour
     #region Unity Methods
     void Start()
     {
-        MLEyes.Start();
+        //MLEyes.Start();
         //meshRenderer = gameObject.GetComponent<MeshRenderer>();
         transform.position = Camera.transform.position + Camera.transform.forward * 2.0f;
 
@@ -121,18 +104,7 @@ public class LaserEye : MonoBehaviour
 
     private void OnDisable()
     {
-        MLEyes.Stop();
-    }
-
-
-    void raycastHit()
-    {
-        float dist = Vector3.Distance(MLEyes.FixationPoint, Camera.transform.position);
-        lineRenderer.gameObject.SetActive(true);
-        lineRenderer.transform.position = Vector3.Lerp(Camera.transform.position, MLEyes.FixationPoint, .5f);
-        lineRenderer.transform.LookAt(MLEyes.FixationPoint);
-        lineRenderer.transform.localScale = new Vector3(lineRenderer.transform.localScale.x, lineRenderer.transform.localScale.y, dist);
-        debug.text = "pos:" + lineRenderer.transform.position + ", scale:" + lineRenderer.transform.localScale;
+        //MLEyes.Stop();
     }
 
     void Update()
@@ -145,42 +117,15 @@ public class LaserEye : MonoBehaviour
         info.text = output;
         //end 
 
-        //original gaze script
-        if (MLEyes.IsStarted)
-        {
+        
 
-            //v2
-            buffer[bufferIndex] = MLEyes.FixationPoint;
-            bufferIndex = (bufferIndex + 1) % 5;
-
-            Vector3 sum = Vector3.zero;
-            for (int i = 0; i < 5; i++)
-            {
-                sum += buffer[i];
-            }
-            currPos = sum / 5;
+        RaycastHit rayHit;
+        if (Physics.Raycast(Camera.transform.position, Camera.transform.forward, out rayHit))
+        {            
+            
+            currPos = rayHit.point;
             gameObject.transform.position = currPos;
-            //gameObject.transform.position = Vector3.MoveTowards(transform.position, currPos, smoothing * Time.deltaTime);
 
-            //transform.position = Vector3.MoveTowards(transform.position, MLEyes.FixationPoint, smoothing * Time.deltaTime);
-
-            //gaze pointer rotation offset
-            gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
-
-
-            Vector3 offset = MLEyes.FixationPoint - currPos;
-            float offsetPos = offset.magnitude;
-            /*          float x = Mathf.Abs(MLEyes.FixationPoint.x - currPos.x);
-                        float y = Mathf.Abs(MLEyes.FixationPoint.y - currPos.y);
-                        float z = Mathf.Abs(MLEyes.FixationPoint.z - currPos.z);
-                        offsetPos = new Vector3(x, y, z);*/
-
-
-
-            /**
-             * 
-             * **/
-            //1. Fixiation laser pointer
             Vector3 delta = (currPos - Camera.transform.position).normalized;
             delta *= .05f;
             lineRenderer.useWorldSpace = true;
@@ -191,33 +136,11 @@ public class LaserEye : MonoBehaviour
             gameObject.transform.position = Camera.transform.position;
             gameObject.transform.localScale = currPos;
 
-            /***
-             *
-             *
-             * 2. Raycast laser pointer
-             *
-            RaycastHit rayHit;
-            _heading = MLEyes.FixationPoint - Camera.transform.position;
 
 
-            if (Physics.Raycast(Camera.transform.position, _heading, out rayHit, 10.0f))
-            {
-                //hit = rayHit.point;
-                lineRenderer.useWorldSpace = true;
-                lineRenderer.SetPosition(0, Camera.transform.position);
-                //lineRenderer.SetPosition(1, rayHit.point);
-                lineRenderer.SetPosition(1, MLEyes.FixationPoint);
 
-            }
-            else
-            {
-                lineRenderer.useWorldSpace = false;
-                lineRenderer.SetPosition(0, Camera.transform.position);
-                lineRenderer.SetPosition(1, Vector3.forward * 5);
-            }
-            //*/
-
-
+            Vector3 offset = MLEyes.FixationPoint - currPos;
+            float offsetPos = offset.magnitude;
 
             if (offsetPos < 0.05)
             {
@@ -232,8 +155,6 @@ public class LaserEye : MonoBehaviour
                 lineRenderer.endColor = endColor;
                 t = 0;
             }
-
-
 
         }
     }
