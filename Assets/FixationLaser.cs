@@ -5,7 +5,7 @@ using MagicLeapTools;
 using UnityEngine.UI;
 using UnityEngine.XR.MagicLeap;
 
-public class LaserEye : MonoBehaviour
+public class FixationLaser : MonoBehaviour
 {
 
     public GameObject Camera;
@@ -45,6 +45,7 @@ public class LaserEye : MonoBehaviour
     private string _initialInfo;
 
     public Vector3 fixationPoint;
+    private Vector3 hitpoint;
 
     /**
      * Playspace
@@ -148,24 +149,56 @@ public class LaserEye : MonoBehaviour
         //original gaze script
         if (MLEyes.IsStarted)
         {
-
-            //v2
-            buffer[bufferIndex] = MLEyes.FixationPoint;
-            bufferIndex = (bufferIndex + 1) % 5;
-
-            Vector3 sum = Vector3.zero;
-            for (int i = 0; i < 5; i++)
+            /**
+            * position for the laser
+            **/
+            RaycastHit rayHit;
+            _heading = MLEyes.FixationPoint - Camera.transform.position;
+            if (Physics.Raycast(Camera.transform.position, _heading, out rayHit, 10.0f))
             {
-                sum += buffer[i];
+                buffer[bufferIndex] = rayHit.point;
+                bufferIndex = (bufferIndex + 1) % 5;
+
+                Vector3 sum = Vector3.zero;
+                for (int i = 0; i < 5; i++)
+                {
+                    sum += buffer[i];
+                }
+                currPos = sum / 5;
+                //currPos = rayHit.point;
+                gameObject.transform.position = currPos;
+                Vector3 delta = (currPos - Camera.transform.position).normalized;
+                delta *= .05f;
+                lineRenderer.useWorldSpace = true;
+                lineRenderer.SetPosition(0, Camera.transform.position);
+                lineRenderer.SetPosition(1, currPos + delta);
+
+                // update the transmission object by updating my own pos and scale as two end points of line renderer
+                gameObject.transform.position = Camera.transform.position;
+                gameObject.transform.localScale = currPos;
             }
-            currPos = sum / 5;
-            gameObject.transform.position = currPos;
-            //gameObject.transform.position = Vector3.MoveTowards(transform.position, currPos, smoothing * Time.deltaTime);
+            else
+            {
+                buffer[bufferIndex] = MLEyes.FixationPoint;
+                bufferIndex = (bufferIndex + 1) % 5;
 
-            //transform.position = Vector3.MoveTowards(transform.position, MLEyes.FixationPoint, smoothing * Time.deltaTime);
+                Vector3 sum = Vector3.zero;
+                for (int i = 0; i < 5; i++)
+                {
+                    sum += buffer[i];
+                }
+                currPos = sum / 5;
+                gameObject.transform.position = currPos;
+                Vector3 delta = (currPos - Camera.transform.position).normalized;
+                delta *= .05f;
+                lineRenderer.useWorldSpace = true;
+                lineRenderer.SetPosition(0, Camera.transform.position);
+                lineRenderer.SetPosition(1, currPos + delta);
 
-            //gaze pointer rotation offset
-            gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
+                // update the transmission object by updating my own pos and scale as two end points of line renderer
+                gameObject.transform.position = Camera.transform.position;
+                gameObject.transform.localScale = currPos;
+            }
 
 
             Vector3 offset = MLEyes.FixationPoint - currPos;
@@ -175,21 +208,6 @@ public class LaserEye : MonoBehaviour
                         float z = Mathf.Abs(MLEyes.FixationPoint.z - currPos.z);
                         offsetPos = new Vector3(x, y, z);*/
 
-
-
-            /**
-             * 
-             * **/
-            //1. Fixiation laser pointer
-            Vector3 delta = (currPos - Camera.transform.position).normalized;
-            delta *= .05f;
-            lineRenderer.useWorldSpace = true;
-            lineRenderer.SetPosition(0, Camera.transform.position);
-            lineRenderer.SetPosition(1, currPos + delta);
-
-            // update the transmission object by updating my own pos and scale as two end points of line renderer
-            gameObject.transform.position = Camera.transform.position;
-            gameObject.transform.localScale = currPos;
 
             /***
              *
