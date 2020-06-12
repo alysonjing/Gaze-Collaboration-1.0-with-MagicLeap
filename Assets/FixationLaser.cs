@@ -47,17 +47,6 @@ public class FixationLaser : MonoBehaviour
     public Vector3 fixationPoint;
     private Vector3 hitpoint;
 
-    /**
-     * Playspace
-     * **/
-    //Public Variables:
-    //public Transform primaryWallPlaque;
-    //public Transform rearWallPlaque;
-    //public Transform rightWallPlaque;
-    //public Transform leftWallPlaque;
-    //public Transform centerPlaque;
-    //public Transform floorPlaque;
-    //public Transform ceilingPlaque;
 
     //spacial alignment Init:
     private void Awake()
@@ -67,15 +56,15 @@ public class FixationLaser : MonoBehaviour
         controlLocator.OnBumperDown.AddListener(HandleBumperDown);
 
         //shared head locator:
-        TransmissionObject headTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject headTransmissionObject = Transmission.Spawn("CursorP", Vector3.zero, Quaternion.identity, Vector3.one);
         headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
-        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectP", Vector3.zero, Quaternion.identity, Vector3.one);
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        TransmissionObject gazeTransmissionObject = Transmission.Spawn("LaserB", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject gazeTransmissionObject = Transmission.Spawn("LaserP", Vector3.zero, Quaternion.identity, Vector3.one);
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
@@ -88,7 +77,7 @@ public class FixationLaser : MonoBehaviour
     private void HandleTriggerDown()
     {
         //stamp a cube in space:
-        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObject", controlLocator.Position, controlLocator.Orientation, Vector3.one);
+        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectP", controlLocator.Position, controlLocator.Orientation, Vector3.one);
         _spawned.Add(spawn);
         //spawn.transform.position = new Vector3(x, y, z);
 
@@ -154,24 +143,24 @@ public class FixationLaser : MonoBehaviour
             **/
             RaycastHit rayHit;
             _heading = MLEyes.FixationPoint - Camera.transform.position;
-            if (Physics.Raycast(Camera.transform.position, _heading, out rayHit, 10.0f))
+            if (Physics.Raycast(Camera.transform.position, _heading, out rayHit))
             {
-                buffer[bufferIndex] = rayHit.point;
-                bufferIndex = (bufferIndex + 1) % 5;
+                //buffer[bufferIndex] = rayHit.point;
+                //bufferIndex = (bufferIndex + 1) % 5;
 
-                Vector3 sum = Vector3.zero;
-                for (int i = 0; i < 5; i++)
-                {
-                    sum += buffer[i];
-                }
-                currPos = sum / 5;
-                //currPos = rayHit.point;
-                gameObject.transform.position = currPos;
-                Vector3 delta = (currPos - Camera.transform.position).normalized;
-                delta *= .05f;
+                //Vector3 sum = Vector3.zero;
+                //for (int i = 0; i < 5; i++)
+                //{
+                //    sum += buffer[i];
+                //}
+                //currPos = sum / 5;
+                currPos = rayHit.point;
+                //gameObject.transform.position = currPos;
+                //Vector3 delta = (currPos - Camera.transform.position).normalized;
+               // delta *= .05f;
                 lineRenderer.useWorldSpace = true;
                 lineRenderer.SetPosition(0, Camera.transform.position);
-                lineRenderer.SetPosition(1, currPos + delta);
+                lineRenderer.SetPosition(1, currPos);
 
                 // update the transmission object by updating my own pos and scale as two end points of line renderer
                 gameObject.transform.position = Camera.transform.position;
@@ -188,12 +177,12 @@ public class FixationLaser : MonoBehaviour
                     sum += buffer[i];
                 }
                 currPos = sum / 5;
-                gameObject.transform.position = currPos;
-                Vector3 delta = (currPos - Camera.transform.position).normalized;
-                delta *= .05f;
+                //gameObject.transform.position = currPos;
+                //Vector3 delta = (currPos - Camera.transform.position).normalized;
+                //delta *= .05f;
                 lineRenderer.useWorldSpace = true;
                 lineRenderer.SetPosition(0, Camera.transform.position);
-                lineRenderer.SetPosition(1, currPos + delta);
+                lineRenderer.SetPosition(1, currPos);
 
                 // update the transmission object by updating my own pos and scale as two end points of line renderer
                 gameObject.transform.position = Camera.transform.position;

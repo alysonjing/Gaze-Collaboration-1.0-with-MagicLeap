@@ -53,15 +53,15 @@ public class Raycast : MonoBehaviour
         controlLocator.OnBumperDown.AddListener(HandleBumperDown);
 
         //shared head locator:
-       TransmissionObject headTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
+       TransmissionObject headTransmissionObject = Transmission.Spawn("CursorP", Vector3.zero, Quaternion.identity, Vector3.one);
        headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
-        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectP", Vector3.zero, Quaternion.identity, Vector3.one);
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        gazeTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
+        gazeTransmissionObject = Transmission.Spawn("CursorP", Vector3.zero, Quaternion.identity, Vector3.one);
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
@@ -75,7 +75,7 @@ public class Raycast : MonoBehaviour
     private void HandleTriggerDown()
     {
         //stamp a cube in space:
-        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObject", controlLocator.Position, controlLocator.Orientation, Vector3.one);
+        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectP", controlLocator.Position, controlLocator.Orientation, Vector3.one);
         _spawned.Add(spawn);
 
     }
@@ -126,14 +126,12 @@ public class Raycast : MonoBehaviour
          */
 
         RaycastHit rayHit;
-        //_heading = MLEyes.FixationPoint - Camera.transform.position;
-        //if (Physics.Raycast(Camera.transform.position, transform.forward, out rayHit))
-        Debug.Log("here..");
+        //Debug.Log("here..");
         if (Physics.Raycast(Camera.transform.position, Camera.transform.forward, out rayHit))
         {
-            Debug.Log("ray hitting:" + rayHit.point + " , hit:" + rayHit.transform.gameObject);
-            Debug.DrawRay(Camera.transform.position, Camera.transform.forward, Color.red);
-            hitpoint = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z- 0.025f);
+            //Debug.Log("ray hitting:" + rayHit.point + " , hit:" + rayHit.transform.gameObject);
+            //Debug.DrawRay(Camera.transform.position, Camera.transform.forward, Color.red);
+            hitpoint = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z- 0.055f);
             //gazeTransmissionObject.transform.position = hitpoint;
             gameObject.transform.position = hitpoint;
             //cursor.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;

@@ -33,6 +33,7 @@ namespace MagicLeapTools
         [HideInInspector] public Quaternion rotationOffset;
         [HideInInspector] public Vector3 targetScale;
 
+
         //Public Properties:
         public bool IsMine
         {

@@ -53,15 +53,15 @@ public class GazeCursorEnhanced : MonoBehaviour
         controlLocator.OnBumperDown.AddListener(HandleBumperDown);
 
         //shared head locator:
-        TransmissionObject headTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject headTransmissionObject = Transmission.Spawn("CursorP", Vector3.zero, Quaternion.identity, Vector3.one);
         headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
-        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectP", Vector3.zero, Quaternion.identity, Vector3.one);
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        gazeTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
+        gazeTransmissionObject = Transmission.Spawn("CursorP", Vector3.zero, Quaternion.identity, Vector3.one);
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
@@ -72,8 +72,9 @@ public class GazeCursorEnhanced : MonoBehaviour
     private void HandleTriggerDown()
     {
         //stamp a cube in space:
-        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObject", controlLocator.Position, controlLocator.Orientation, Vector3.one);
+        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectP", controlLocator.Position, controlLocator.Orientation, Vector3.one);
         _spawned.Add(spawn);
+        
 
     }
 
@@ -125,35 +126,44 @@ public class GazeCursorEnhanced : MonoBehaviour
             //gameObject.transform.position = filterd;
             // oldPos = gameObject.transform.position;
 
-
-            //v2
-            buffer[bufferIndex] = MLEyes.FixationPoint;
-            bufferIndex = (bufferIndex + 1) % 5;
-
-            Vector3 sum = Vector3.zero;
-            for (int i = 0; i < 5; i++)
-            {
-                sum += buffer[i];
-            }
-            currPos = sum / 5;
-
             /**
              * position for the cursor
              **/
             RaycastHit rayHit;
             _heading = MLEyes.FixationPoint - Camera.transform.position;
-            if (Physics.Raycast(Camera.transform.position, _heading, out rayHit, 10.0f))
+            if (Physics.Raycast(Camera.transform.position, _heading, out rayHit))
             {
-                hitpoint = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z - 0.025f);
-                //gameObject.transform.position = hitpoint;
+                //buffer[bufferIndex] = rayHit.point;
+                //bufferIndex = (bufferIndex + 1) % 5;
+
+                //Vector3 sum = Vector3.zero;
+                //for (int i = 0; i < 5; i++)
+                //{
+                //    sum += buffer[i];
+                //}
+                //currPos = sum / 5;
+                hitpoint = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z - 0.055f);
+
                 gameObject.transform.position = Vector3.MoveTowards(transform.position, hitpoint, smoothing * Time.deltaTime);
-                gameObject.transform.rotation = Camera.transform.rotation;
+                //gameObject.transform.rotation = Camera.transform.rotation;
+                //Quaternion rotation = Quaternion.FromToRotation(Vector3.up, normal);
+                gameObject.transform.rotation = Quaternion.Euler(rayHit.normal);
             }
             else {
+
+                buffer[bufferIndex] = MLEyes.FixationPoint;
+                bufferIndex = (bufferIndex + 1) % 5;
+
+                Vector3 sum = Vector3.zero;
+                for (int i = 0; i < 5; i++)
+                {
+                    sum += buffer[i];
+                }
+                currPos = sum / 5;
+
                 gameObject.transform.position = Vector3.MoveTowards(transform.position, currPos, smoothing * Time.deltaTime);
-                //gaze pointer rotation offset
                 gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
-                //MLdebugger.text = MLEyes.FixationPoint + "\n" + currPos + "\n" + offsetRot + "\n" + t + "\n";
+
             }
 
 
