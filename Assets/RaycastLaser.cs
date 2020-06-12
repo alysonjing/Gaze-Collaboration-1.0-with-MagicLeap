@@ -49,15 +49,15 @@ public class RaycastLaser : MonoBehaviour
         controlLocator.OnBumperDown.AddListener(HandleBumperDown);
 
         //shared head locator:
-        TransmissionObject headTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject headTransmissionObject = Transmission.Spawn("CursorP", Vector3.zero, Quaternion.identity, Vector3.one);
         headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
-        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObject", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectP", Vector3.zero, Quaternion.identity, Vector3.one);
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        TransmissionObject gazeTransmissionObject = Transmission.Spawn("LaserB", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject gazeTransmissionObject = Transmission.Spawn("LaserP", Vector3.zero, Quaternion.identity, Vector3.one);
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
@@ -70,7 +70,7 @@ public class RaycastLaser : MonoBehaviour
     private void HandleTriggerDown()
     {
         //stamp a cube in space:
-        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObject", controlLocator.Position, controlLocator.Orientation, Vector3.one);
+        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectP", controlLocator.Position, controlLocator.Orientation, Vector3.one);
         _spawned.Add(spawn);
         //spawn.transform.position = new Vector3(x, y, z);
 
@@ -124,13 +124,13 @@ public class RaycastLaser : MonoBehaviour
         {            
             
             currPos = rayHit.point;
-            gameObject.transform.position = currPos;
+            //gameObject.transform.position = currPos;
 
-            Vector3 delta = (currPos - Camera.transform.position).normalized;
-            delta *= .05f;
+            //Vector3 delta = (currPos - Camera.transform.position).normalized;
+            //delta *= .05f;
             lineRenderer.useWorldSpace = true;
             lineRenderer.SetPosition(0, Camera.transform.position);
-            lineRenderer.SetPosition(1, currPos + delta);
+            lineRenderer.SetPosition(1, currPos);
 
             // update the transmission object by updating my own pos and scale as two end points of line renderer
             gameObject.transform.position = Camera.transform.position;

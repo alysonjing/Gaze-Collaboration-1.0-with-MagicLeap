@@ -53,15 +53,15 @@ public class GazeCursorEnhanced : MonoBehaviour
         controlLocator.OnBumperDown.AddListener(HandleBumperDown);
 
         //shared head locator:
-        TransmissionObject headTransmissionObject = Transmission.Spawn("CursorP", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject headTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
         headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
-        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectP", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectB", Vector3.zero, Quaternion.identity, Vector3.one);
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        gazeTransmissionObject = Transmission.Spawn("CursorP", Vector3.zero, Quaternion.identity, Vector3.one);
+        gazeTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
@@ -72,7 +72,7 @@ public class GazeCursorEnhanced : MonoBehaviour
     private void HandleTriggerDown()
     {
         //stamp a cube in space:
-        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectP", controlLocator.Position, controlLocator.Orientation, Vector3.one);
+        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectB", controlLocator.Position, controlLocator.Orientation, Vector3.one);
         _spawned.Add(spawn);
         
 
@@ -145,9 +145,9 @@ public class GazeCursorEnhanced : MonoBehaviour
                 hitpoint = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z - 0.055f);
 
                 gameObject.transform.position = Vector3.MoveTowards(transform.position, hitpoint, smoothing * Time.deltaTime);
-                //gameObject.transform.rotation = Camera.transform.rotation;
+                gameObject.transform.rotation = Camera.transform.rotation;
                 //Quaternion rotation = Quaternion.FromToRotation(Vector3.up, normal);
-                gameObject.transform.rotation = Quaternion.Euler(rayHit.normal);
+                //gameObject.transform.rotation = Quaternion.Euler(rayHit.normal);
             }
             else {
 
