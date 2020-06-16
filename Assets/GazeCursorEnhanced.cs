@@ -145,9 +145,9 @@ public class GazeCursorEnhanced : MonoBehaviour
                 hitpoint = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z - 0.055f);
 
                 gameObject.transform.position = Vector3.MoveTowards(transform.position, hitpoint, smoothing * Time.deltaTime);
-                gameObject.transform.rotation = Camera.transform.rotation;
+                //gameObject.transform.rotation = Camera.transform.rotation;
                 //Quaternion rotation = Quaternion.FromToRotation(Vector3.up, normal);
-                //gameObject.transform.rotation = Quaternion.Euler(rayHit.normal);
+                gameObject.transform.rotation = Quaternion.FromToRotation(Vector3.back, rayHit.normal);
             }
             else {
 

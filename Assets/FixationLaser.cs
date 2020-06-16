@@ -138,9 +138,6 @@ public class FixationLaser : MonoBehaviour
         //original gaze script
         if (MLEyes.IsStarted)
         {
-            /**
-            * position for the laser
-            **/
             RaycastHit rayHit;
             _heading = MLEyes.FixationPoint - Camera.transform.position;
             if (Physics.Raycast(Camera.transform.position, _heading, out rayHit))
