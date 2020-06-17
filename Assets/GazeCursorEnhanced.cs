@@ -61,7 +61,7 @@ public class GazeCursorEnhanced : MonoBehaviour
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        gazeTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
+        gazeTransmissionObject = Transmission.Spawn("CursorP", Vector3.zero, Quaternion.identity, Vector3.one);
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
@@ -146,23 +146,22 @@ public class GazeCursorEnhanced : MonoBehaviour
 
                 gameObject.transform.position = Vector3.MoveTowards(transform.position, hitpoint, smoothing * Time.deltaTime);
                 //gameObject.transform.rotation = Camera.transform.rotation;
-                //Quaternion rotation = Quaternion.FromToRotation(Vector3.up, normal);
                 gameObject.transform.rotation = Quaternion.FromToRotation(Vector3.back, rayHit.normal);
             }
             else {
 
-                buffer[bufferIndex] = MLEyes.FixationPoint;
-                bufferIndex = (bufferIndex + 1) % 5;
+                //buffer[bufferIndex] = MLEyes.FixationPoint;
+                //bufferIndex = (bufferIndex + 1) % 5;
 
-                Vector3 sum = Vector3.zero;
-                for (int i = 0; i < 5; i++)
-                {
-                    sum += buffer[i];
-                }
-                currPos = sum / 5;
+                //Vector3 sum = Vector3.zero;
+                //for (int i = 0; i < 5; i++)
+                //{
+                //    sum += buffer[i];
+                //}
+                //currPos = sum / 5;
 
-                gameObject.transform.position = Vector3.MoveTowards(transform.position, currPos, smoothing * Time.deltaTime);
-                gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
+                //gameObject.transform.position = Vector3.MoveTowards(transform.position, currPos, smoothing * Time.deltaTime);
+                //gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
 
             }
 
