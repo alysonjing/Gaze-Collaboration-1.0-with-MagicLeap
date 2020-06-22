@@ -161,7 +161,8 @@ public class FixationLaser : MonoBehaviour
 
                 // update the transmission object by updating my own pos and scale as two end points of line renderer
                 gameObject.transform.position = Camera.transform.position;
-                gameObject.transform.localScale = currPos;
+                gameObject.transform.rotation = Quaternion.FromToRotation(Vector3.forward, (currPos - Camera.transform.position).normalized);
+                gameObject.transform.localScale = Vector3.one * (currPos - Camera.transform.position).magnitude;
             }
             else
             {

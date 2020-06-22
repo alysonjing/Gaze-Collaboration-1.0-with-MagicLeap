@@ -17,6 +17,7 @@ public class LaserUpdate : MonoBehaviour
     {
         lineRenderer.useWorldSpace = true;
         lineRenderer.SetPosition(0, gameObject.transform.position);
-        lineRenderer.SetPosition(1, gameObject.transform.localScale);
+        Vector3 v = gameObject.transform.rotation * Vector3.forward * gameObject.transform.localScale.x;
+        lineRenderer.SetPosition(1, gameObject.transform.position + v);
     }
 }

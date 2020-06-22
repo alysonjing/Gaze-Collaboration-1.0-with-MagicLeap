@@ -142,7 +142,7 @@ public class GazeCursorEnhanced : MonoBehaviour
                 //    sum += buffer[i];
                 //}
                 //currPos = sum / 5;
-                hitpoint = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z - 0.055f);
+                hitpoint = new Vector3(rayHit.point.x, rayHit.point.y, rayHit.point.z) - (_heading.normalized * 0.05f);
 
                 gameObject.transform.position = Vector3.MoveTowards(transform.position, hitpoint, smoothing * Time.deltaTime);
                 //gameObject.transform.rotation = Camera.transform.rotation;
