@@ -142,16 +142,16 @@ public class FixationLaser : MonoBehaviour
             _heading = MLEyes.FixationPoint - Camera.transform.position;
             if (Physics.Raycast(Camera.transform.position, _heading, out rayHit))
             {
-                //buffer[bufferIndex] = rayHit.point;
-                //bufferIndex = (bufferIndex + 1) % 5;
+                buffer[bufferIndex] = rayHit.point;
+                bufferIndex = (bufferIndex + 1) % 5;
 
-                //Vector3 sum = Vector3.zero;
-                //for (int i = 0; i < 5; i++)
-                //{
-                //    sum += buffer[i];
-                //}
-                //currPos = sum / 5;
-                currPos = rayHit.point;
+                Vector3 sum = Vector3.zero;
+                for (int i = 0; i < 5; i++)
+                {
+                    sum += buffer[i];
+                }
+                currPos = sum / 5;
+                //currPos = rayHit.point;
                 //gameObject.transform.position = currPos;
                 //Vector3 delta = (currPos - Camera.transform.position).normalized;
                // delta *= .05f;
@@ -166,25 +166,25 @@ public class FixationLaser : MonoBehaviour
             }
             else
             {
-                buffer[bufferIndex] = MLEyes.FixationPoint;
-                bufferIndex = (bufferIndex + 1) % 5;
+                //buffer[bufferIndex] = MLEyes.FixationPoint;
+                //bufferIndex = (bufferIndex + 1) % 5;
 
-                Vector3 sum = Vector3.zero;
-                for (int i = 0; i < 5; i++)
-                {
-                    sum += buffer[i];
-                }
-                currPos = sum / 5;
-                //gameObject.transform.position = currPos;
-                //Vector3 delta = (currPos - Camera.transform.position).normalized;
-                //delta *= .05f;
-                lineRenderer.useWorldSpace = true;
-                lineRenderer.SetPosition(0, Camera.transform.position);
-                lineRenderer.SetPosition(1, currPos);
+                //Vector3 sum = Vector3.zero;
+                //for (int i = 0; i < 5; i++)
+                //{
+                //    sum += buffer[i];
+                //}
+                //currPos = sum / 5;
+                ////gameObject.transform.position = currPos;
+                ////Vector3 delta = (currPos - Camera.transform.position).normalized;
+                ////delta *= .05f;
+                //lineRenderer.useWorldSpace = true;
+                //lineRenderer.SetPosition(0, Camera.transform.position);
+                //lineRenderer.SetPosition(1, currPos);
 
-                // update the transmission object by updating my own pos and scale as two end points of line renderer
-                gameObject.transform.position = Camera.transform.position;
-                gameObject.transform.localScale = currPos;
+                //// update the transmission object by updating my own pos and scale as two end points of line renderer
+                //gameObject.transform.position = Camera.transform.position;
+                //gameObject.transform.localScale = currPos;
             }
 
 

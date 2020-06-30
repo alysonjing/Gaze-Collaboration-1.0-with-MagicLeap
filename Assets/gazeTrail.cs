@@ -5,12 +5,12 @@ using MagicLeapTools;
 using UnityEngine.UI;
 using UnityEngine.XR.MagicLeap;
 
-public class GazeCursorEnhanced : MonoBehaviour
+public class gazeTrail : MonoBehaviour
 {
 
     public GameObject Camera;
-    public MeshRenderer meshRenderer;
-    public Material startingC, changingC, mutual;
+    //public MeshRenderer meshRenderer;
+    //public Material startingC, changingC, mutual;
 
     Vector3 filterd = new Vector3();
     int bufferIndex = 0;
@@ -53,15 +53,15 @@ public class GazeCursorEnhanced : MonoBehaviour
         controlLocator.OnBumperDown.AddListener(HandleBumperDown);
 
         //shared head locator:
-        TransmissionObject headTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject headTransmissionObject = Transmission.Spawn("CursorP", Vector3.zero, Quaternion.identity, Vector3.one);
         headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
-        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectB", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectP", Vector3.zero, Quaternion.identity, Vector3.one);
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        gazeTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
+        gazeTransmissionObject = Transmission.Spawn("TrailP", Vector3.zero, Quaternion.identity, Vector3.one);
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
@@ -72,9 +72,9 @@ public class GazeCursorEnhanced : MonoBehaviour
     private void HandleTriggerDown()
     {
         //stamp a cube in space:
-        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectB", controlLocator.Position, controlLocator.Orientation, Vector3.one);
+        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectP", controlLocator.Position, controlLocator.Orientation, Vector3.one);
         _spawned.Add(spawn);
-        
+
 
     }
 
@@ -96,7 +96,7 @@ public class GazeCursorEnhanced : MonoBehaviour
     void Start()
     {
         MLEyes.Start();
-        meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        //meshRenderer = gameObject.GetComponent<MeshRenderer>();
         //transform.position = Camera.transform.position + Camera.transform.forward * 2.0f;
 
         //cursorInstance = Instantiate(cursorPrefab);
@@ -121,11 +121,6 @@ public class GazeCursorEnhanced : MonoBehaviour
         if (MLEyes.IsStarted)
         {
 
-            //v1
-            //filterd = Vector3.Lerp(filterd, MLEyes.FixationPoint, 0.7f);
-            //gameObject.transform.position = filterd;
-            // oldPos = gameObject.transform.position;
-
             /**
              * position for the cursor
              **/
@@ -148,7 +143,8 @@ public class GazeCursorEnhanced : MonoBehaviour
                 //gameObject.transform.rotation = Camera.transform.rotation;
                 gameObject.transform.rotation = Quaternion.FromToRotation(Vector3.back, rayHit.normal);
             }
-            else {
+            else
+            {
 
                 //buffer[bufferIndex] = MLEyes.FixationPoint;
                 //bufferIndex = (bufferIndex + 1) % 5;
@@ -175,14 +171,14 @@ public class GazeCursorEnhanced : MonoBehaviour
 
             if (offsetPos < 0.05)
             {
-                t += Time.deltaTime;
-                if (t > 3)
-                {
+                //t += Time.deltaTime;
+                //if (t > 3)
+                //{
                     //meshRenderer.material = mutual;
                     //gazeTransmissionObject.Despawn();
                     //gazeTransmissionObject = Transmission.Spawn("CursorM", Vector3.zero, Quaternion.identity, Vector3.one);
                     //gazeTransmissionObject.motionSource = gameObject.transform;
-                }
+               // }
             }
             else
             {

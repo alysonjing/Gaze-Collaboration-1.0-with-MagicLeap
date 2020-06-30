@@ -33,6 +33,14 @@ namespace MagicLeapTools
         private void LateUpdate()
         {
             pcf.SetPositionAndRotation(sharedOrigin.position, sharedOrigin.rotation);
+            /*if (pcf == null)
+                Debug.Log("PCF NULL");
+            if (sharedOrigin == null)
+                Debug.Log("SHARED ORIGIN NULL");
+            if (pcf != null && sharedOrigin != null) // Changed shared origin
+            {
+                pcf.SetPositionAndRotation(sharedOrigin.position, sharedOrigin.rotation);
+            }*/
         }
 
         //Public Variables:
