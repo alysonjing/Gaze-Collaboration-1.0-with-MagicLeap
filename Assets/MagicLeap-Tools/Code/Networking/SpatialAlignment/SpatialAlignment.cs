@@ -61,11 +61,13 @@ namespace MagicLeapTools
             if (!MLPersistentCoordinateFrames.IsStarted)
             {
                 MLPersistentCoordinateFrames.Start();
+                Debug.Log("pcf started");
 
                 //wait for MLPersistentCoordinateFrames to localize:
                 while (!MLPersistentCoordinateFrames.IsLocalized)
                 {
                     yield return null;
+                    Debug.Log("pcf localization failed"); //debug pcf
                 }
 
                 //establish shared pcf:
@@ -74,6 +76,7 @@ namespace MagicLeapTools
                 {
                     //keep looking:
                     yield return new WaitForSeconds(_pcfSearchTimeout);
+                    Debug.Log("shared pcf no match yet");
                 }
 
                 //hooks:

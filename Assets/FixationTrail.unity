@@ -791,6 +791,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1738202094222762948, guid: fb329c7237e55394da30653003113007,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1738202094222762948, guid: fb329c7237e55394da30653003113007,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1738202094222762948, guid: fb329c7237e55394da30653003113007,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 1738202094222762950, guid: fb329c7237e55394da30653003113007,
         type: 3}
       propertyPath: m_Enabled
@@ -800,7 +815,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
+      objectReference: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
     - target: {fileID: 1738202094222762951, guid: fb329c7237e55394da30653003113007,
         type: 3}
       propertyPath: m_Mesh
@@ -1841,6 +1856,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9145247081681001195, guid: 75086d78ad70cdb40b69ac1fecd4d179, type: 3}
+    - {fileID: -3653408761573203205, guid: 75086d78ad70cdb40b69ac1fecd4d179, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 75086d78ad70cdb40b69ac1fecd4d179, type: 3}
 --- !u!4 &764283994 stripped
 Transform:
@@ -1854,27 +1870,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 764283993}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &764283996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764283995}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc0778ba9d4b8cc4da95f6f506789e39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Camera: {fileID: 237370495}
-  startColor: {r: 1, g: 0, b: 0.956861, a: 0.23529412}
-  endColor: {r: 0.9622642, g: 0, b: 0.56158566, a: 0.23529412}
-  offsetRot: {x: 0, y: 0, z: 0}
-  smoothing: 10
-  controlLocator: {fileID: 442972563}
-  info: {fileID: 1845416827}
-  debug: {fileID: 0}
-  fixationPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &764283997
 MonoBehaviour:
   m_ObjectHideFlags: 0
