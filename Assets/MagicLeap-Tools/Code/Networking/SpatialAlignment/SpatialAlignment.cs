@@ -67,7 +67,7 @@ namespace MagicLeapTools
                 while (!MLPersistentCoordinateFrames.IsLocalized)
                 {
                     yield return null;
-                    Debug.Log("pcf localization failed"); //debug pcf
+                    Debug.Log("pcf localization failed"); //aj debug
                 }
 
                 //establish shared pcf:
@@ -76,7 +76,7 @@ namespace MagicLeapTools
                 {
                     //keep looking:
                     yield return new WaitForSeconds(_pcfSearchTimeout);
-                    Debug.Log("shared pcf no match yet");
+                    Debug.Log("shared pcf no match yet"); //aj debug
                 }
 
                 //hooks:
@@ -102,6 +102,7 @@ namespace MagicLeapTools
             while (_anchorPCF == null)
             {
                 yield return null;
+                Debug.Log("no pcf anchor"); //aj debug
             }
 
             //update the global shared pcf:
