@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8506158093999348558}
   - component: {fileID: 8506158093999348553}
   - component: {fileID: 217925906538496950}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CursorB
   m_TagString: gazePointer
   m_Icon: {fileID: 0}

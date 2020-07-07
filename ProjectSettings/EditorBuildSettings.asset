@@ -9,13 +9,13 @@ EditorBuildSettings:
     path: Assets/FixationLaser.unity
     guid: 1e824d60a17693d4aa2f39f8c7c89543
   - enabled: 0
-    path: Assets/FixationCursor.unity
+    path: Assets/FixationCursor0521.unity
     guid: b13ad53b9e00c75418c0eab242fe2518
   - enabled: 0
-    path: Assets/HeadGaze/RaycastCursor0521.unity
+    path: Assets/RaycastCursor0521.unity
     guid: 537374444229daf4787e6b13db9b0155
   - enabled: 0
-    path: Assets/HeadGaze/RaycastLaser.unity
+    path: Assets/RaycastLaser.unity
     guid: 120c5e68a68bede43bf45971b257d256
   - enabled: 1
     path: Assets/FixationTrail.unity

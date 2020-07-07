@@ -62,6 +62,7 @@ public class gazeTrail : MonoBehaviour
 
         //share gaze locator: Not sure how to change?
         gazeTransmissionObject = Transmission.Spawn("TrailP", Vector3.zero, Quaternion.identity, Vector3.one);
+        gazeTransmissionObject.GetComponent<TrailRenderer>().enabled = false;
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
