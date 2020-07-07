@@ -123,12 +123,14 @@ namespace MagicLeapTools
 
                 //keep looking:
                 yield return new WaitForSeconds(_pcfSearchTimeout);
+                Debug.Log("No shared pcf yet"); //aj debug
             }
 
             //we have our shared pcf!
             Reorient();
             Localized = true;
             OnLocalized?.Invoke();
+            Debug.Log("shared pcf success"); //aj debug
         }
 
         //Event Handlers:
@@ -163,6 +165,7 @@ namespace MagicLeapTools
             {
                 //our shared pcf updated:
                 Reorient();
+                Debug.Log("localized pcf updated"); //aj debug
             }
         }
 
@@ -172,6 +175,7 @@ namespace MagicLeapTools
             {
                 //our shared pcf updated:
                 Reorient();
+                Debug.Log("pcf status updated"); //aj debug
             }
         }
 
@@ -180,6 +184,7 @@ namespace MagicLeapTools
         {
             _sharedPCF.Update();
             Transmission.Instance.sharedOrigin = new Pose(_sharedPCF.Position, _sharedPCF.Rotation);
+            Debug.Log("shared pcf reoriented"); //aj debug
         }
 #endif
     }
