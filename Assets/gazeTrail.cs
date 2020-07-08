@@ -9,8 +9,13 @@ public class gazeTrail : MonoBehaviour
 {
 
     public GameObject Camera;
+    public Vector3 currPos;
     //public MeshRenderer meshRenderer;
-    //public Material startingC, changingC, mutual;
+    public Material startingC, changingC, mutual;
+    //public bool testLerp = false;
+    public float smoothing = 10;
+    public Vector3 offset;
+    public float offsetPos;
 
     Vector3 filterd = new Vector3();
     int bufferIndex = 0;
@@ -20,19 +25,16 @@ public class gazeTrail : MonoBehaviour
     [SerializeField]
     private Vector3 offsetRot;
     //private Vector3 offsetPos;
-    public Vector3 currPos;
+    
     private Camera mainCam;
     private TextMesh MLdebugger;
+    private Renderer _gazeRenderer;
 
     private Vector3 _heading;
     private Vector3 hitpoint;
-
-
     private float t = 0;
-    //public bool testLerp = false;
-    public float smoothing = 10;
 
-    TransmissionObject gazeTransmissionObject;
+ 
 
     /***
      * spatial alignment
@@ -43,6 +45,9 @@ public class gazeTrail : MonoBehaviour
 
     private List<TransmissionObject> _spawned = new List<TransmissionObject>();
     private string _initialInfo;
+
+    TransmissionObject gazeTransmissionObject;
+    //TransmissionObject gazeTransmissionObject2;
 
 
     //spacial alignment Init:
@@ -62,8 +67,10 @@ public class gazeTrail : MonoBehaviour
 
         //share gaze locator: Not sure how to change?
         gazeTransmissionObject = Transmission.Spawn("TrailP", Vector3.zero, Quaternion.identity, Vector3.one);
-        gazeTransmissionObject.GetComponent<TrailRenderer>().enabled = false;
+        _gazeRenderer = gazeTransmissionObject.GetComponent<Renderer>();
+        gazeTransmissionObject.GetComponent<TrailRenderer>().enabled = true;
         gazeTransmissionObject.motionSource = gameObject.transform;
+
 
         //sets:
         _initialInfo = info.text;
@@ -90,6 +97,41 @@ public class gazeTrail : MonoBehaviour
         _spawned.Clear();
     }
 
+    public void SendFixation()
+    {
+        RPCMessage rpcMessage = new RPCMessage("ChangeFixation");
+        Transmission.Send(rpcMessage);
+    
+    }
+
+    public void SendPink()
+    {
+        RPCMessage rpcMessage = new RPCMessage("ChangePink");
+        Transmission.Send(rpcMessage);
+
+    }
+
+    public void SendBlue()
+    {
+        RPCMessage rpcMessage = new RPCMessage("ChangeBlue");
+        Transmission.Send(rpcMessage);
+
+    }
+
+    public void ChangeFixation()
+    {
+        _gazeRenderer.material= mutual;
+    }
+
+    public void ChangePink()
+    {
+        _gazeRenderer.material = startingC;
+    }
+
+    public void ChangeBlue()
+    {
+        _gazeRenderer.material = changingC;
+    }
 
 
 
@@ -129,6 +171,7 @@ public class gazeTrail : MonoBehaviour
             _heading = MLEyes.FixationPoint - Camera.transform.position;
             if (Physics.Raycast(Camera.transform.position, _heading, out rayHit))
             {
+                
                 buffer[bufferIndex] = rayHit.point;
                 bufferIndex = (bufferIndex + 1) % 5;
 
@@ -143,6 +186,31 @@ public class gazeTrail : MonoBehaviour
                 gameObject.transform.position = Vector3.MoveTowards(transform.position, hitpoint, smoothing * Time.deltaTime);
                 //gameObject.transform.rotation = Camera.transform.rotation;
                 gameObject.transform.rotation = Quaternion.FromToRotation(Vector3.back, rayHit.normal);
+
+                /**
+                * Offset position radius
+                **/
+                offset = MLEyes.FixationPoint - currPos;
+                offsetPos = offset.magnitude;
+
+                if (offsetPos < 0.05)
+                {
+                    t += Time.deltaTime;
+                    if (t > 3)
+                    {
+                        //meshRenderer.material = mutual;
+                        SendFixation();
+
+                    }
+                }
+                else
+                {
+                    //meshRenderer.material = startingC;
+                    t = 0;
+                    SendPink();
+                    //ChangeBlue();
+                }
+
             }
             else
             {
@@ -160,32 +228,6 @@ public class gazeTrail : MonoBehaviour
                 //gameObject.transform.position = Vector3.MoveTowards(transform.position, currPos, smoothing * Time.deltaTime);
                 //gameObject.transform.eulerAngles = Camera.transform.eulerAngles + offsetRot;
 
-            }
-
-
-
-            /**
-             * Offset position radius
-             **/
-            Vector3 offset = MLEyes.FixationPoint - currPos;
-            float offsetPos = offset.magnitude;
-
-            if (offsetPos < 0.05)
-            {
-                //t += Time.deltaTime;
-                //if (t > 3)
-                //{
-                    //meshRenderer.material = mutual;
-                    //gazeTransmissionObject.Despawn();
-                    //gazeTransmissionObject = Transmission.Spawn("CursorM", Vector3.zero, Quaternion.identity, Vector3.one);
-                    //gazeTransmissionObject.motionSource = gameObject.transform;
-               // }
-            }
-            else
-            {
-                //meshRenderer.material = startingC;
-                t = 0;
-                //gazeTransmissionObject.Despawn();
             }
         }
     }

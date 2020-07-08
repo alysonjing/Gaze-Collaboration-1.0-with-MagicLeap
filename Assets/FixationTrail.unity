@@ -799,7 +799,7 @@ PrefabInstance:
     - target: {fileID: 1738202094222762950, guid: fb329c7237e55394da30653003113007,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1738202094222762950, guid: fb329c7237e55394da30653003113007,
         type: 3}
@@ -833,13 +833,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 0}
+  currPos: {x: 0, y: 0, z: 0}
   meshRenderer: {fileID: 0}
   startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
   changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
   mutual: {fileID: 0}
-  offsetRot: {x: 0, y: 0, z: 0}
-  currPos: {x: 0, y: 0, z: 0}
   smoothing: 10
+  offset: {x: 0, y: 0, z: 0}
+  offsetPos: 0
+  offsetRot: {x: 0, y: 0, z: 0}
   controlLocator: {fileID: 0}
   info: {fileID: 0}
 --- !u!114 &370057789
@@ -855,9 +857,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 237370495}
-  offsetRot: {x: 0, y: 0, z: 0}
   currPos: {x: 0, y: 0, z: 0}
+  startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
+  changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
+  mutual: {fileID: 2100000, guid: c02829c7bf537f048978406827f59fda, type: 2}
   smoothing: 10
+  offset: {x: 0, y: 0, z: 0}
+  offsetPos: 0
+  offsetRot: {x: 0, y: 0, z: 0}
   controlLocator: {fileID: 442972563}
   info: {fileID: 1845416827}
 --- !u!1 &442972562
@@ -1477,9 +1484,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 237370495}
-  offsetRot: {x: 0, y: 0, z: 0}
   currPos: {x: 0, y: 0, z: 0}
+  startingC: {fileID: 0}
+  changingC: {fileID: 0}
+  mutual: {fileID: 0}
   smoothing: 10
+  offset: {x: 0, y: 0, z: 0}
+  offsetPos: 0
+  offsetRot: {x: 0, y: 0, z: 0}
   controlLocator: {fileID: 442972563}
   info: {fileID: 1845416827}
 --- !u!114 &578443533
@@ -1495,13 +1507,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 237370495}
+  currPos: {x: 0, y: 0, z: 0}
   meshRenderer: {fileID: 578443534}
   startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
   changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
-  mutual: {fileID: 0}
-  offsetRot: {x: 0, y: 0, z: 0}
-  currPos: {x: 0, y: 0, z: 0}
+  mutual: {fileID: 2100000, guid: c02829c7bf537f048978406827f59fda, type: 2}
   smoothing: 10
+  offset: {x: 0, y: 0, z: 0}
+  offsetPos: 0
+  offsetRot: {x: 0, y: 0, z: 0}
   controlLocator: {fileID: 442972563}
   info: {fileID: 1845416827}
 --- !u!23 &578443534 stripped
@@ -2130,9 +2144,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 237370495}
-  offsetRot: {x: 0, y: 0, z: 0}
   currPos: {x: 0, y: 0, z: 0}
+  startingC: {fileID: 0}
+  changingC: {fileID: 0}
+  mutual: {fileID: 0}
   smoothing: 10
+  offset: {x: 0, y: 0, z: 0}
+  offsetPos: 0
+  offsetRot: {x: 0, y: 0, z: 0}
   controlLocator: {fileID: 442972563}
   info: {fileID: 1845416827}
 --- !u!1001 &822157468
