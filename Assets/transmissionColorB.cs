@@ -28,7 +28,8 @@ public class transmissionColorB : MonoBehaviour
 
     void Update()
     {
-        Vector3 newPos = transmissionObj.localPosition;
+        Vector3 newPos = transform.localPosition;
+        //Vector3 newPos = transform.position;
         currentPos = newPos;
         float offsetPos = (newPos - prevPos).magnitude;
 
@@ -37,20 +38,39 @@ public class transmissionColorB : MonoBehaviour
             t += Time.deltaTime;
             if (t > 2)
             {
-                currentMaterial = mutual.name;
-                meshRenderer.material = mutual;
-                trailRenderer.material = mutual;
-                lineRenderer.material = mutual;
+                currentMaterial = "" + offsetPos;
+                //currentMaterial = mutual.name;
+                if (lineRenderer)
+                {
+                    lineRenderer.material = mutual;
+                }
+                if (meshRenderer)
+                {
+                    meshRenderer.material = mutual;
+                }
+                if (trailRenderer)
+                {
+                    trailRenderer.material = mutual;
+                }
             }
         }
         else
         {
             prevPos = newPos;
-            t = 0;
             currentMaterial = changingC.name;
-            meshRenderer.material = changingC;
-            trailRenderer.material = changingC;
-            lineRenderer.material = changingC;            
+            t = 0;
+            if (lineRenderer)
+            {
+                lineRenderer.material = changingC;
+            }
+            if (meshRenderer)
+            {
+                meshRenderer.material = changingC;
+            }
+            if (trailRenderer)
+            {
+                trailRenderer.material = changingC;
+            }          
         }
     }
 }
