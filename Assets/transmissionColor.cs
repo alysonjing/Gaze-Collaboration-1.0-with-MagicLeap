@@ -12,10 +12,13 @@ public class transmissionColor : MonoBehaviour
     private float t = 0;
     private Vector3 prevPos;
 
+    public static string currentMaterial = "????";
+
     void Start()
     {
         transmissionObj = GetComponent<TransmissionObject>();
         meshRenderer = GetComponent<MeshRenderer>();
+        currentMaterial = "Instantiated";
     }
 
     void Update()
@@ -28,12 +31,14 @@ public class transmissionColor : MonoBehaviour
             t += Time.deltaTime;
             if (t > 3)
             {
+                currentMaterial = mutual.name;
                 meshRenderer.material = mutual;
             }
         }
         else
         {
             prevPos = newPos;
+            currentMaterial = startingC.name;
             meshRenderer.material = startingC;
             t = 0;
         }

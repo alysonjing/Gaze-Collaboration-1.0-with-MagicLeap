@@ -201,7 +201,7 @@ public class GazeCursorEnhanced : MonoBehaviour
                     if (t > 3)
                     {
                         //meshRenderer.material = mutual;
-                        ChangeFixation();
+                        //ChangeFixation();
 
                     }
                 }
@@ -209,7 +209,7 @@ public class GazeCursorEnhanced : MonoBehaviour
                 {
                     //meshRenderer.material = startingC;
                     t = 0;
-                    ChangePink();
+                    //ChangePink();
                     //ChangeBlue();
                 }
             }

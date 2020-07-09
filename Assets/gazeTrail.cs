@@ -156,6 +156,7 @@ public class gazeTrail : MonoBehaviour
         string output = _initialInfo + System.Environment.NewLine;
         output += "Peers Available: " + Transmission.Instance.Peers.Length + System.Environment.NewLine;
         output += "Localized: " + SpatialAlignment.Localized;
+        output += "color: " + transmissionColor.currentMaterial;
 
         info.text = output;
         //end 
