@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 8506158093999348553}
   - component: {fileID: 217925906538496950}
   - component: {fileID: 1260234170010645290}
+  - component: {fileID: 958308130436113091}
   m_Layer: 5
-  m_Name: CursorP 1
+  m_Name: TrailP
   m_TagString: gazePointer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,7 +159,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 2
+  m_Time: 3
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.01
@@ -215,3 +216,18 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &958308130436113091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8506158093999348555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c59be44fc8ff11a43907c758da5b3aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
+  changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
+  mutual: {fileID: 2100000, guid: c02829c7bf537f048978406827f59fda, type: 2}

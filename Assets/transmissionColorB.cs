@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MagicLeapTools;
 
-public class transmissionColor : MonoBehaviour
+public class transmissionColorB : MonoBehaviour
 {
 
     TransmissionObject transmissionObj;
@@ -47,10 +47,10 @@ public class transmissionColor : MonoBehaviour
         {
             prevPos = newPos;
             t = 0;
-            currentMaterial = startingC.name;
-            meshRenderer.material = startingC;
-            trailRenderer.material = startingC;
-            lineRenderer.material = startingC;
+            currentMaterial = changingC.name;
+            meshRenderer.material = changingC;
+            trailRenderer.material = changingC;
+            lineRenderer.material = changingC;            
         }
     }
 }

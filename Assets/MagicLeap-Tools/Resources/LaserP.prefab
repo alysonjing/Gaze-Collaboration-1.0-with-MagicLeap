@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 6138072522441955237}
   - component: {fileID: 6670668270635682241}
   - component: {fileID: -7791762486112325805}
+  - component: {fileID: -51991917660379865}
   m_Layer: 0
-  m_Name: Laser
+  m_Name: LaserP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,3 +166,18 @@ MonoBehaviour:
   localPosition: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0, w: 0}
   targetScale: {x: 0, y: 0, z: 0}
+--- !u!114 &-51991917660379865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6138072522441955235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c59be44fc8ff11a43907c758da5b3aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
+  changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
+  mutual: {fileID: 2100000, guid: c02829c7bf537f048978406827f59fda, type: 2}

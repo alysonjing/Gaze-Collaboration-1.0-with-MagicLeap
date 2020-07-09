@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 2372548141128795874}
   - component: {fileID: 9145247081681001195}
   - component: {fileID: -3653408761573203205}
+  - component: {fileID: -6617828892271303699}
   m_Layer: 0
-  m_Name: LazerB
+  m_Name: LaserB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,3 +166,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c931eb3619f66e449daa78e1fe27969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6617828892271303699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2372548141128795876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63cc45bde6f2e974199630196bfb1325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
+  changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
+  mutual: {fileID: 2100000, guid: c02829c7bf537f048978406827f59fda, type: 2}

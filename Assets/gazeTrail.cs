@@ -68,7 +68,7 @@ public class gazeTrail : MonoBehaviour
         //share gaze locator: Not sure how to change?
         gazeTransmissionObject = Transmission.Spawn("TrailP", Vector3.zero, Quaternion.identity, Vector3.one);
         _gazeRenderer = gazeTransmissionObject.GetComponent<Renderer>();
-        gazeTransmissionObject.GetComponent<TrailRenderer>().enabled = true;
+        gazeTransmissionObject.GetComponent<TrailRenderer>().enabled = false;  //debug > should turn to false in user study
         gazeTransmissionObject.motionSource = gameObject.transform;
 
 
@@ -156,7 +156,9 @@ public class gazeTrail : MonoBehaviour
         string output = _initialInfo + System.Environment.NewLine;
         output += "Peers Available: " + Transmission.Instance.Peers.Length + System.Environment.NewLine;
         output += "Localized: " + SpatialAlignment.Localized;
-        output += "color: " + transmissionColor.currentMaterial;
+        //output += " | : " + transmissionColorB.currentMaterial; //debug Blue
+        //output += " | : " + transmissionColor.currentMaterial; //debug Pink
+        //output += "currentPos" + transmissionColorB.currentPos;
 
         info.text = output;
         //end 
@@ -200,16 +202,16 @@ public class gazeTrail : MonoBehaviour
                     if (t > 3)
                     {
                         //meshRenderer.material = mutual;
-                        SendFixation();
+                        //SendFixation();
 
                     }
                 }
                 else
                 {
                     //meshRenderer.material = startingC;
-                    t = 0;
-                    SendPink();
-                    //ChangeBlue();
+                    //t = 0;
+                    //SendPink();
+                    //SendBlue();
                 }
 
             }
