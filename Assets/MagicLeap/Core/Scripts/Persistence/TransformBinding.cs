@@ -238,6 +238,7 @@ namespace MagicLeap.Core
         /// </returns>
         public bool Regain()
         {
+            return true; //ajtest
             if (this.pcf == null || this.transform == null)
             {
                 MLResult result = MLResult.Create(MLResult.Code.UnspecifiedFailure, "PCF or Transform is null and must be set.");
@@ -266,6 +267,8 @@ namespace MagicLeap.Core
             return true;
         }
 
+
+
         /// <summary>
         /// Used to hook into the OnLocalized event and queue the associated PCF for updates again when we are localized.
         /// </summary>
@@ -273,7 +276,9 @@ namespace MagicLeap.Core
         {
             #if PLATFORM_LUMIN
             // Queue this pcf for state updates again since the pcf cache is cleared when maps are lost.
-            MLPersistentCoordinateFrames.OnLocalized += HandleOnLocalized;
+
+            //MLPersistentCoordinateFrames.OnLocalized += HandleOnLocalized;  //ajtest
+
             #endif
             return true;
         }
