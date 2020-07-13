@@ -58,18 +58,18 @@ public class gazeTrail : MonoBehaviour
         controlLocator.OnBumperDown.AddListener(HandleBumperDown);
 
         //shared head locator:
-        //TransmissionObject headTransmissionObject = Transmission.Spawn("HeadB", Vector3.zero, Quaternion.identity, Vector3.one);  //Blue user
-        TransmissionObject headTransmissionObject = Transmission.Spawn("HeadP", Vector3.zero, Quaternion.identity, Vector3.one);  //Pink user
+        TransmissionObject headTransmissionObject = Transmission.Spawn("HeadB", Vector3.zero, Quaternion.identity, Vector3.one);  //Blue user
+        //TransmissionObject headTransmissionObject = Transmission.Spawn("HeadP", Vector3.zero, Quaternion.identity, Vector3.one);  //Pink user
         headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
-        //TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectB", Vector3.zero, Quaternion.identity, Vector3.one);  //Blue user
-        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectP", Vector3.zero, Quaternion.identity, Vector3.one); //Pink user
+        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectB", Vector3.zero, Quaternion.identity, Vector3.one);  //Blue user
+        //TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectP", Vector3.zero, Quaternion.identity, Vector3.one); //Pink user
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        //gazeTransmissionObject = Transmission.Spawn("TrailB", Vector3.zero, Quaternion.identity, Vector3.one);  //Blue user
-        gazeTransmissionObject = Transmission.Spawn("TrailP", Vector3.zero, Quaternion.identity, Vector3.one);  //Pink user
+        gazeTransmissionObject = Transmission.Spawn("TrailB", Vector3.zero, Quaternion.identity, Vector3.one);  //Blue user
+        //gazeTransmissionObject = Transmission.Spawn("TrailP", Vector3.zero, Quaternion.identity, Vector3.one);  //Pink user
         _gazeRenderer = gazeTransmissionObject.GetComponent<Renderer>();
         gazeTransmissionObject.GetComponent<TrailRenderer>().enabled = false;  //debug > should turn to false in user study
         gazeTransmissionObject.motionSource = gameObject.transform;
@@ -83,8 +83,8 @@ public class gazeTrail : MonoBehaviour
     private void HandleTriggerDown()
     {
         //stamp a cube in space:
-        //TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectB", controlLocator.Position, controlLocator.Orientation, Vector3.one);  //Blue user
-        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectP", controlLocator.Position, controlLocator.Orientation, Vector3.one);  //Pink user
+        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectB", controlLocator.Position, controlLocator.Orientation, Vector3.one);  //Blue user
+        //TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectP", controlLocator.Position, controlLocator.Orientation, Vector3.one);  //Pink user
         _spawned.Add(spawn);
 
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.MagicLeap;
 using MagicLeap.Core;
-
+using MagicLeapTools;
 
 [RequireComponent(typeof(MLImageTrackerBehavior))]
 public class TrackingVisuals : MonoBehaviour
@@ -12,6 +12,8 @@ public class TrackingVisuals : MonoBehaviour
     private bool _targetFound = false;
     private MLImageTrackerBehavior _trackingBehaviour = null;
     public GameObject TrackedObject;
+    private Transmission transmission;
+
     void Start()
     {
         _trackingBehaviour = GetComponent<MLImageTrackerBehavior>();
@@ -20,6 +22,9 @@ public class TrackingVisuals : MonoBehaviour
         _trackingBehaviour.OnTargetUpdated += OnTargetUpdated;
 
         RefreshViewMode();
+
+        // Initializing transmission object;
+        transmission = GetComponent<Transmission>();
     }
 
     void OnTargetFound(MLImageTracker.Target target, MLImageTracker.Target.Result result)
@@ -34,10 +39,20 @@ public class TrackingVisuals : MonoBehaviour
         RefreshViewMode();
     }
 
+    //void OnTargetUpdated(MLImageTracker.Target target, MLImageTracker.Target.Result result)
+    //{
+    //    transform.position = result.Position;
+    //    transform.rotation = result.Rotation;
+    //}
+
     void OnTargetUpdated(MLImageTracker.Target target, MLImageTracker.Target.Result result)
     {
-        transform.position = result.Position;
-        transform.rotation = result.Rotation;
+        TrackedObject.transform.position = transform.position;
+        TrackedObject.transform.rotation = transform.rotation;
+        // 
+        //Pose newPose = new Pose(result.Position, result.Rotation);
+        // Offset = Camera Pos - newPose;
+        transmission.sharedOrigin = new Pose(result.Position, result.Rotation);
     }
 
     void OnDestroy()
