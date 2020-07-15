@@ -238,7 +238,7 @@ namespace MagicLeap.Core
         /// </returns>
         public bool Regain()
         {
-            return true; //ajtest
+            //return true; //ajtest
             if (this.pcf == null || this.transform == null)
             {
                 MLResult result = MLResult.Create(MLResult.Code.UnspecifiedFailure, "PCF or Transform is null and must be set.");
