@@ -230,4 +230,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
   changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
-  mutual: {fileID: 2100000, guid: c02829c7bf537f048978406827f59fda, type: 2}
+  focus: {fileID: 2100000, guid: c02829c7bf537f048978406827f59fda, type: 2}
+  fix: {fileID: 2100000, guid: 4b8382b6f9143c345921280dd627385f, type: 2}

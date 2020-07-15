@@ -136,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &62670664
 Transform:
   m_ObjectHideFlags: 0
@@ -2123,14 +2123,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 237370495}
+  fixationPoint: {x: 0, y: 0, z: 0}
+  smoothing: 10
   startColor: {r: 1, g: 0, b: 0.956861, a: 0.23529412}
   endColor: {r: 0.9622642, g: 0, b: 0.56158566, a: 0.23529412}
   offsetRot: {x: 0, y: 0, z: 0}
-  smoothing: 10
   controlLocator: {fileID: 442972563}
   info: {fileID: 1845416827}
   debug: {fileID: 0}
-  fixationPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &764283997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4137,7 +4137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1886802266
 Transform:
   m_ObjectHideFlags: 0
@@ -4223,7 +4223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a647e089498735c44a77d43aed6f2df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TrackedObject: {fileID: 0}
+  TrackedObject: {fileID: 8506158093999348555, guid: 94e21499719de444ea9f0b4bfef18aaa,
+    type: 3}
 --- !u!114 &1902996827
 MonoBehaviour:
   m_ObjectHideFlags: 0

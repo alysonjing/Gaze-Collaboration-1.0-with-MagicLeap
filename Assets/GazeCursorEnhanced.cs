@@ -53,24 +53,35 @@ public class GazeCursorEnhanced : MonoBehaviour
     private void Awake()
     {
         //hooks:
-        controlLocator.OnTriggerDown.AddListener(HandleTriggerDown);
-        controlLocator.OnBumperDown.AddListener(HandleBumperDown);
+        if (controlLocator)
+        {
+            controlLocator.OnTriggerDown.AddListener(HandleTriggerDown);
+            controlLocator.OnBumperDown.AddListener(HandleBumperDown);
+        }
 
         //shared head locator:
-        TransmissionObject headTransmissionObject = Transmission.Spawn("CursorP", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject headTransmissionObject = Transmission.Spawn("HeadP", Vector3.zero, Quaternion.identity, Vector3.one);
+        //TransmissionObject headTransmissionObject = Transmission.Spawn("HeadB", Vector3.zero, Quaternion.identity, Vector3.one);
         headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
         TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectP", Vector3.zero, Quaternion.identity, Vector3.one);
-        controlTransmissionObject.motionSource = controlLocator.transform;
+        //TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectB", Vector3.zero, Quaternion.identity, Vector3.one);
+
+        if(controlLocator) 
+            controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
         gazeTransmissionObject = Transmission.Spawn("CursorP", Vector3.zero, Quaternion.identity, Vector3.one);
+        //gazeTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
         _gazeRenderer = gazeTransmissionObject.GetComponentInChildren<Renderer>();
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
-        _initialInfo = info.text;
+        if (info)
+        {
+            _initialInfo = info.text;
+        }
     }
 
     //Event Handlers:
@@ -78,6 +89,7 @@ public class GazeCursorEnhanced : MonoBehaviour
     {
         //stamp a cube in space:
         TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectP", controlLocator.Position, controlLocator.Orientation, Vector3.one);
+        //TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectB", controlLocator.Position, controlLocator.Orientation, Vector3.one);
         _spawned.Add(spawn);
         
 
@@ -150,12 +162,17 @@ public class GazeCursorEnhanced : MonoBehaviour
     void Update()
     {
         //Spatial alignment
-        string output = _initialInfo + System.Environment.NewLine;
-        output += "Peers Available: " + Transmission.Instance.Peers.Length + System.Environment.NewLine;
-        output += "Localized: " + SpatialAlignment.Localized;
+        if (info)
+        {
+            string output = _initialInfo + System.Environment.NewLine;
+            output += "Peers Available: " + Transmission.Instance.Peers.Length + System.Environment.NewLine;
+            output += "Localized: " + SpatialAlignment.Localized;
+            output += " |B : " + transmissionColorB.currentMaterial; //debug Blue
+            output += " |P : " + transmissionColor.currentMaterial; //debug Pink
 
-        info.text = output;
-        //end 
+            info.text = output;
+            //end 
+        }
 
         //original gaze script
         if (MLEyes.IsStarted)

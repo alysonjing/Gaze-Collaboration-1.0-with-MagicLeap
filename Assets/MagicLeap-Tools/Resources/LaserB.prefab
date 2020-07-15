@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2372548141128795876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -78,7 +78,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.05
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -180,4 +180,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
   changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
-  mutual: {fileID: 2100000, guid: c02829c7bf537f048978406827f59fda, type: 2}
+  focus: {fileID: 2100000, guid: c02829c7bf537f048978406827f59fda, type: 2}
+  fix: {fileID: 2100000, guid: 4b8382b6f9143c345921280dd627385f, type: 2}
+  Laser: 1

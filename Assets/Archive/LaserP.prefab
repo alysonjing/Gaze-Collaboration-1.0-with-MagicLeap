@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 8506158093999348558}
   - component: {fileID: 8506158093999348553}
   - component: {fileID: 217925906538496950}
-  - component: {fileID: 3149710039810597115}
-  - component: {fileID: -3194300057318006945}
+  - component: {fileID: -5453984333777670899}
+  - component: {fileID: -4869088564720123884}
+  - component: {fileID: -7410639941315002470}
   m_Layer: 5
-  m_Name: TrailB
+  m_Name: LaserP
   m_TagString: gazePointer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +52,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8506158093999348555}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
+  - {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -119,9 +120,25 @@ MonoBehaviour:
   localPosition: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0, w: 0}
   targetScale: {x: 0, y: 0, z: 0}
---- !u!96 &3149710039810597115
-TrailRenderer:
-  serializedVersion: 2
+--- !u!114 &-5453984333777670899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8506158093999348555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c59be44fc8ff11a43907c758da5b3aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
+  changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
+  focus: {fileID: 2100000, guid: c02829c7bf537f048978406827f59fda, type: 2}
+  fix: {fileID: 2100000, guid: 4b8382b6f9143c345921280dd627385f, type: 2}
+  Laser: 1
+--- !u!120 &-4869088564720123884
+LineRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -138,7 +155,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
+  - {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -150,7 +167,7 @@ TrailRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -159,16 +176,18 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 3
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.01
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.18292618
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -213,10 +232,9 @@ TrailRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
-  m_Autodestruct: 0
-  m_Emitting: 1
---- !u!114 &-3194300057318006945
+  m_UseWorldSpace: 1
+  m_Loop: 0
+--- !u!114 &-7410639941315002470
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,10 +243,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8506158093999348555}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63cc45bde6f2e974199630196bfb1325, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c931eb3619f66e449daa78e1fe27969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
-  changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
-  focus: {fileID: 2100000, guid: c02829c7bf537f048978406827f59fda, type: 2}
-  fix: {fileID: 2100000, guid: 4b8382b6f9143c345921280dd627385f, type: 2}

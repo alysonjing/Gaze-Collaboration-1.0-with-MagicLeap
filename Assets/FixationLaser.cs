@@ -9,10 +9,10 @@ public class FixationLaser : MonoBehaviour
 {
 
     public GameObject Camera;
-    //public MeshRenderer meshRenderer;
-    //public Material startingC, changingC;
-    public Color startColor;
-    public Color endColor;
+    public Vector3 fixationPoint;
+    public float smoothing = 10;
+    public Color startColor, endColor;
+    //public bool testLerp = false;
 
     Vector3 filterd = new Vector3();
     int bufferIndex = 0;
@@ -22,16 +22,11 @@ public class FixationLaser : MonoBehaviour
     [SerializeField]
     private Vector3 offsetRot;
     private Vector3 currPos;
-
     private Vector3 _heading;
     private LineRenderer lineRenderer;
-
-    //public CylinderLaser cylinderLaser;
-
-
     private float t = 0;
-    //public bool testLerp = false;
-    public float smoothing = 10;
+    private Vector3 hitpoint;
+    private Renderer _gazeRenderer;
 
     /***
      * spatial alignment
@@ -44,9 +39,6 @@ public class FixationLaser : MonoBehaviour
     private List<TransmissionObject> _spawned = new List<TransmissionObject>();
     private string _initialInfo;
 
-    public Vector3 fixationPoint;
-    private Vector3 hitpoint;
-
 
     //spacial alignment Init:
     private void Awake()
@@ -56,15 +48,20 @@ public class FixationLaser : MonoBehaviour
         controlLocator.OnBumperDown.AddListener(HandleBumperDown);
 
         //shared head locator:
-        TransmissionObject headTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject headTransmissionObject = Transmission.Spawn("HeadP", Vector3.zero, Quaternion.identity, Vector3.one);
+        //TransmissionObject headTransmissionObject = Transmission.Spawn("HeadB", Vector3.zero, Quaternion.identity, Vector3.one);
         headTransmissionObject.motionSource = Camera.transform;
 
         //shared controll locator:
-        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectB", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectP", Vector3.zero, Quaternion.identity, Vector3.one);
+        //TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectB", Vector3.zero, Quaternion.identity, Vector3.one);
         controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        TransmissionObject gazeTransmissionObject = Transmission.Spawn("LaserB", Vector3.zero, Quaternion.identity, Vector3.one);
+        TransmissionObject gazeTransmissionObject = Transmission.Spawn("LaserP", Vector3.zero, Quaternion.identity, Vector3.one);
+        //TransmissionObject gazeTransmissionObject = Transmission.Spawn("LaserB", Vector3.zero, Quaternion.identity, Vector3.one);
+        _gazeRenderer = gazeTransmissionObject.GetComponent<Renderer>();
+        gazeTransmissionObject.GetComponent<LineRenderer>().enabled = false;  //debug > should turn to false in user study
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
@@ -77,7 +74,8 @@ public class FixationLaser : MonoBehaviour
     private void HandleTriggerDown()
     {
         //stamp a cube in space:
-        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectB", controlLocator.Position, controlLocator.Orientation, Vector3.one);
+        TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectP", controlLocator.Position, controlLocator.Orientation, Vector3.one);
+        //TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectB", controlLocator.Position, controlLocator.Orientation, Vector3.one);
         _spawned.Add(spawn);
         //spawn.transform.position = new Vector3(x, y, z);
 
@@ -115,15 +113,15 @@ public class FixationLaser : MonoBehaviour
     }
 
 
-    void raycastHit()
-    {
-        float dist = Vector3.Distance(MLEyes.FixationPoint, Camera.transform.position);
-        lineRenderer.gameObject.SetActive(true);
-        lineRenderer.transform.position = Vector3.Lerp(Camera.transform.position, MLEyes.FixationPoint, .5f);
-        lineRenderer.transform.LookAt(MLEyes.FixationPoint);
-        lineRenderer.transform.localScale = new Vector3(lineRenderer.transform.localScale.x, lineRenderer.transform.localScale.y, dist);
-        debug.text = "pos:" + lineRenderer.transform.position + ", scale:" + lineRenderer.transform.localScale;
-    }
+    //void raycastHit()
+    //{
+    //    float dist = Vector3.Distance(MLEyes.FixationPoint, Camera.transform.position);
+    //    lineRenderer.gameObject.SetActive(true);
+    //    lineRenderer.transform.position = Vector3.Lerp(Camera.transform.position, MLEyes.FixationPoint, .5f);
+    //    lineRenderer.transform.LookAt(MLEyes.FixationPoint);
+    //    lineRenderer.transform.localScale = new Vector3(lineRenderer.transform.localScale.x, lineRenderer.transform.localScale.y, dist);
+    //    debug.text = "pos:" + lineRenderer.transform.position + ", scale:" + lineRenderer.transform.localScale;
+    //}
 
     void Update()
     {
@@ -131,6 +129,8 @@ public class FixationLaser : MonoBehaviour
         string output = _initialInfo + System.Environment.NewLine;
         output += "Peers Available: " + Transmission.Instance.Peers.Length + System.Environment.NewLine;
         output += "Localized: " + SpatialAlignment.Localized;
+        output += " |B : " + transmissionColorB.currentMaterial; //debug Blue
+        output += " |P : " + transmissionColor.currentMaterial; //debug Pink
 
         info.text = output;
         //end 

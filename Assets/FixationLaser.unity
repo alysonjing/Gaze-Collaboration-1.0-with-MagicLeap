@@ -150,6 +150,7 @@ Transform:
   m_Children:
   - {fileID: 1855898603}
   - {fileID: 434907522}
+  - {fileID: 971202122}
   - {fileID: 67589685}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -994,7 +995,7 @@ Transform:
   - {fileID: 1469854434}
   - {fileID: 2107045638}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &434907522 stripped
 Transform:
@@ -1785,7 +1786,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.7e-44, z: 2.962e-42, w: 1.05e-43}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2518,7 +2519,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 20233090}
     m_Modifications:
     - target: {fileID: 1738202094222762944, guid: fb329c7237e55394da30653003113007,
         type: 3}
@@ -2618,7 +2619,7 @@ PrefabInstance:
     - target: {fileID: 1738202094222762947, guid: fb329c7237e55394da30653003113007,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1738202094222762948, guid: fb329c7237e55394da30653003113007,
         type: 3}
@@ -2658,7 +2659,7 @@ PrefabInstance:
     - target: {fileID: 1738202094222762948, guid: fb329c7237e55394da30653003113007,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1738202094222762948, guid: fb329c7237e55394da30653003113007,
         type: 3}
@@ -2675,10 +2676,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1738202094222762948, guid: fb329c7237e55394da30653003113007,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1738202094222762948, guid: fb329c7237e55394da30653003113007,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1738202094222762950, guid: fb329c7237e55394da30653003113007,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1738202094222762951, guid: fb329c7237e55394da30653003113007,
         type: 3}
@@ -2707,15 +2718,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 237370495}
+  currPos: {x: 0, y: 0, z: 0}
   meshRenderer: {fileID: 1053693832}
   startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
   changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
   mutual: {fileID: 0}
-  offsetRot: {x: 0, y: 0, z: 0}
-  currPos: {x: 0, y: 0, z: 0}
   smoothing: 10
+  offset: {x: 0, y: 0, z: 0}
+  offsetPos: 0
+  offsetRot: {x: 0, y: 0, z: 0}
   controlLocator: {fileID: 0}
   info: {fileID: 0}
+--- !u!4 &971202122 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1738202094222762948, guid: fb329c7237e55394da30653003113007,
+    type: 3}
+  m_PrefabInstance: {fileID: 971202116}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &1053693832 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 8506158093999348558, guid: 951c94db134ca3145bf4bf609715f9ff,
@@ -3958,6 +3977,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 20233090}
     m_Modifications:
+    - target: {fileID: -6617828892271303699, guid: 75086d78ad70cdb40b69ac1fecd4d179,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2372548141128795873, guid: 75086d78ad70cdb40b69ac1fecd4d179,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3996,7 +4020,7 @@ PrefabInstance:
     - target: {fileID: 2372548141128795873, guid: 75086d78ad70cdb40b69ac1fecd4d179,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2372548141128795873, guid: 75086d78ad70cdb40b69ac1fecd4d179,
         type: 3}
@@ -4062,6 +4086,45 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2977111307243118148}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &2977111307243118150
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977111307243118149}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!114 &2977111307243118151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4075,14 +4138,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 237370495}
+  fixationPoint: {x: 0, y: 0, z: 0}
+  smoothing: 10
   startColor: {r: 1, g: 0, b: 0.956861, a: 0.23529412}
   endColor: {r: 0.9622642, g: 0, b: 0.56158566, a: 0.23529412}
   offsetRot: {x: 0, y: 0, z: 0}
-  smoothing: 10
   controlLocator: {fileID: 1452557662}
   info: {fileID: 1845416827}
   debug: {fileID: 0}
-  fixationPoint: {x: 0, y: 0, z: 0}
+--- !u!33 &2977111307243118152
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977111307243118149}
+  m_Mesh: {fileID: 4300000, guid: 469d0d5dd3558804ca56a8d0fa774dae, type: 3}
 --- !u!1001 &6143897629141831219
 PrefabInstance:
   m_ObjectHideFlags: 0
