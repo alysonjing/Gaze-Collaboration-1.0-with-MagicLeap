@@ -71,7 +71,7 @@ public class GazeCursorEnhanced : MonoBehaviour
         if(controlLocator) 
             controlTransmissionObject.motionSource = controlLocator.transform;
 
-        //share gaze locator: Not sure how to change?
+        //share gaze locator
         gazeTransmissionObject = Transmission.Spawn("CursorP", Vector3.zero, Quaternion.identity, Vector3.one);
         //gazeTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
         _gazeRenderer = gazeTransmissionObject.GetComponentInChildren<Renderer>();

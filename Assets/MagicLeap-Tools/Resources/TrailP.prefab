@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8506158093999348556}
-  - component: {fileID: 8506158093999348559}
   - component: {fileID: 8506158093999348558}
   - component: {fileID: 8506158093999348553}
   - component: {fileID: 217925906538496950}
   - component: {fileID: 1260234170010645290}
   - component: {fileID: 958308130436113091}
+  - component: {fileID: 6955363904789990835}
   m_Layer: 5
   m_Name: TrailP
   m_TagString: gazePointer
@@ -36,14 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8506158093999348559
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8506158093999348555}
-  m_Mesh: {fileID: 4300000, guid: 469d0d5dd3558804ca56a8d0fa774dae, type: 3}
 --- !u!23 &8506158093999348558
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -51,7 +43,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8506158093999348555}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -232,3 +224,12 @@ MonoBehaviour:
   changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
   focus: {fileID: 2100000, guid: c02829c7bf537f048978406827f59fda, type: 2}
   fix: {fileID: 2100000, guid: 4b8382b6f9143c345921280dd627385f, type: 2}
+  Laser: 0
+--- !u!33 &6955363904789990835
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8506158093999348555}
+  m_Mesh: {fileID: 4300000, guid: 469d0d5dd3558804ca56a8d0fa774dae, type: 3}

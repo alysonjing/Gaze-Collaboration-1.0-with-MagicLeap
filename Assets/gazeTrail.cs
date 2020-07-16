@@ -53,9 +53,11 @@ public class gazeTrail : MonoBehaviour
     //spacial alignment Init:
     private void Awake()
     {
-        //hooks:
-        controlLocator.OnTriggerDown.AddListener(HandleTriggerDown);
-        controlLocator.OnBumperDown.AddListener(HandleBumperDown);
+        if (controlLocator)
+        {
+            controlLocator.OnTriggerDown.AddListener(HandleTriggerDown);
+            controlLocator.OnBumperDown.AddListener(HandleBumperDown);
+        }
 
         //shared head locator:
         //TransmissionObject headTransmissionObject = Transmission.Spawn("HeadB", Vector3.zero, Quaternion.identity, Vector3.one);  //Blue user
@@ -65,7 +67,8 @@ public class gazeTrail : MonoBehaviour
         //shared controll locator:
         //TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectB", Vector3.zero, Quaternion.identity, Vector3.one);  //Blue user
         TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectP", Vector3.zero, Quaternion.identity, Vector3.one); //Pink user
-        controlTransmissionObject.motionSource = controlLocator.transform;
+        if (controlLocator)
+            controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
         //gazeTransmissionObject = Transmission.Spawn("TrailB", Vector3.zero, Quaternion.identity, Vector3.one);  //Blue user
@@ -74,9 +77,11 @@ public class gazeTrail : MonoBehaviour
         gazeTransmissionObject.GetComponent<TrailRenderer>().enabled = false;  //debug > should turn to false in user study
         gazeTransmissionObject.motionSource = gameObject.transform;
 
-
         //sets:
-        _initialInfo = info.text;
+        if (info)
+        {
+            _initialInfo = info.text;
+        }
     }
 
     //Event Handlers:
@@ -97,8 +102,9 @@ public class gazeTrail : MonoBehaviour
         {
             item.Despawn();
         }
-
         _spawned.Clear();
+        //test trail visibility
+        gazeTransmissionObject.GetComponent<TrailRenderer>().enabled = !gazeTransmissionObject.GetComponent<TrailRenderer>().enabled;
     }
 
     public void SendFixation()
