@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8506158093999348555}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -232,3 +232,4 @@ MonoBehaviour:
   changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}
   focus: {fileID: 2100000, guid: c02829c7bf537f048978406827f59fda, type: 2}
   fix: {fileID: 2100000, guid: 4b8382b6f9143c345921280dd627385f, type: 2}
+  Laser: 0

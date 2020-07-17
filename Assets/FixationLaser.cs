@@ -28,6 +28,8 @@ public class FixationLaser : MonoBehaviour
     private Vector3 hitpoint;
     private Renderer _gazeRenderer;
 
+    TransmissionObject gazeTransmissionObject;
+
     /***
      * spatial alignment
      * 
@@ -44,8 +46,11 @@ public class FixationLaser : MonoBehaviour
     private void Awake()
     {
         //hooks:
-        controlLocator.OnTriggerDown.AddListener(HandleTriggerDown);
-        controlLocator.OnBumperDown.AddListener(HandleBumperDown);
+        if (controlLocator)
+        {
+            controlLocator.OnTriggerDown.AddListener(HandleTriggerDown);
+            controlLocator.OnBumperDown.AddListener(HandleBumperDown);
+        }
 
         //shared head locator:
         TransmissionObject headTransmissionObject = Transmission.Spawn("HeadP", Vector3.zero, Quaternion.identity, Vector3.one);
@@ -55,17 +60,20 @@ public class FixationLaser : MonoBehaviour
         //shared controll locator:
         TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectP", Vector3.zero, Quaternion.identity, Vector3.one);
         //TransmissionObject controlTransmissionObject = Transmission.Spawn("SampleTransmissionObjectB", Vector3.zero, Quaternion.identity, Vector3.one);
-        controlTransmissionObject.motionSource = controlLocator.transform;
+        if (controlLocator)
+            controlTransmissionObject.motionSource = controlLocator.transform;
 
         //share gaze locator: Not sure how to change?
-        TransmissionObject gazeTransmissionObject = Transmission.Spawn("LaserP", Vector3.zero, Quaternion.identity, Vector3.one);
-        //TransmissionObject gazeTransmissionObject = Transmission.Spawn("LaserB", Vector3.zero, Quaternion.identity, Vector3.one);
+        gazeTransmissionObject = Transmission.Spawn("LaserP", Vector3.zero, Quaternion.identity, Vector3.one);
+        //gazeTransmissionObject = Transmission.Spawn("LaserB", Vector3.zero, Quaternion.identity, Vector3.one);
         _gazeRenderer = gazeTransmissionObject.GetComponent<Renderer>();
         gazeTransmissionObject.GetComponent<LineRenderer>().enabled = false;  //debug > should turn to false in user study
         gazeTransmissionObject.motionSource = gameObject.transform;
 
-        //sets:
-        _initialInfo = info.text;
+        if (info)
+        {
+            _initialInfo = info.text;
+        }
 
     }
 
@@ -90,8 +98,8 @@ public class FixationLaser : MonoBehaviour
         {
             item.Despawn();
         }
-
         _spawned.Clear();
+        gazeTransmissionObject.GetComponent<LineRenderer>().enabled = !gazeTransmissionObject.GetComponent<LineRenderer>().enabled;
     }
 
 
