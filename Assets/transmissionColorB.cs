@@ -8,9 +8,9 @@ public class transmissionColorB : MonoBehaviour
 
     TransmissionObject transmissionObj;
     private MeshRenderer meshRenderer;
+    public MeshRenderer childRenderer;
     private TrailRenderer trailRenderer;
     private LineRenderer lineRenderer;
-    public Material startingC, changingC, focus, fix;
     private float t = 0;
     private Vector3 prevPos;
 
@@ -18,11 +18,13 @@ public class transmissionColorB : MonoBehaviour
     public static string currentMaterial = "????";
     public static Vector3 currentPos;
     public bool Laser = false;
+    public Material startingC, changingC, focus, fix;
 
     void Start()
     {
         transmissionObj = GetComponent<TransmissionObject>();
         meshRenderer = GetComponent<MeshRenderer>();
+        childRenderer.enabled = false;
         trailRenderer = GetComponent<TrailRenderer>();
         lineRenderer = GetComponent<LineRenderer>();
         currentMaterial = "Instantiated";
@@ -40,7 +42,7 @@ public class transmissionColorB : MonoBehaviour
         if (offsetPos < 0.05)
         {
             t += Time.deltaTime;
-            if (t > 2 && t < 5)
+            if (t > 0.5 && t < 1.5)
             {
                 //currentMaterial = mutual.name;
                 if (lineRenderer)
@@ -51,12 +53,17 @@ public class transmissionColorB : MonoBehaviour
                 {
                     meshRenderer.material = focus;
                 }
+                if (childRenderer)
+                {
+                    childRenderer.material = focus;
+                    childRenderer.enabled = true;
+                }
                 if (trailRenderer)
                 {
                     trailRenderer.material = focus;
                 }
             }
-            if (t >= 5)
+            if (t >= 1.5)
             {
                 //currentMaterial = mutual.name;
                 if (lineRenderer)
@@ -66,6 +73,11 @@ public class transmissionColorB : MonoBehaviour
                 if (meshRenderer)
                 {
                     meshRenderer.material = fix;
+                }
+                if (childRenderer)
+                {
+                    childRenderer.material = fix;
+                    childRenderer.enabled = true;
                 }
                 if (trailRenderer)
                 {
@@ -85,6 +97,11 @@ public class transmissionColorB : MonoBehaviour
             if (meshRenderer)
             {
                 meshRenderer.material = changingC;
+            }
+            if (childRenderer)
+            {
+                childRenderer.material = changingC;
+                childRenderer.enabled = false;
             }
             if (trailRenderer)
             {

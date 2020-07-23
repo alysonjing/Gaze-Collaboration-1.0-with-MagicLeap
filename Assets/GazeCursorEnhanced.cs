@@ -74,7 +74,7 @@ public class GazeCursorEnhanced : MonoBehaviour
         //share gaze locator
         gazeTransmissionObject = Transmission.Spawn("CursorP", Vector3.zero, Quaternion.identity, Vector3.one);
         //gazeTransmissionObject = Transmission.Spawn("CursorB", Vector3.zero, Quaternion.identity, Vector3.one);
-        _gazeRenderer = gazeTransmissionObject.GetComponentInChildren<Renderer>();
+        _gazeRenderer = gazeTransmissionObject.GetComponent<MeshRenderer>();
         gazeTransmissionObject.motionSource = gameObject.transform;
 
         //sets:
@@ -215,7 +215,7 @@ public class GazeCursorEnhanced : MonoBehaviour
                 if (offsetPos < 0.05)
                 {
                     t += Time.deltaTime;
-                    if (t > 3)
+                    if (t > 0.5)
                     {
                         //meshRenderer.material = mutual;
                         //ChangeFixation();

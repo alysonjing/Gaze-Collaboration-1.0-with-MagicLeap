@@ -85,9 +85,6 @@ public class FixationLaser : MonoBehaviour
         TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectP", controlLocator.Position, controlLocator.Orientation, Vector3.one);
         //TransmissionObject spawn = Transmission.Spawn("SampleTransmissionObjectB", controlLocator.Position, controlLocator.Orientation, Vector3.one);
         _spawned.Add(spawn);
-        //GetComponent<MeshRenderer>().enabled = !GetComponent<MeshRenderer>().enabled;
-
-        //spawn.transform.position = new Vector3(x, y, z);
 
     }
 
