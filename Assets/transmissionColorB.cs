@@ -8,7 +8,7 @@ public class transmissionColorB : MonoBehaviour
 
     TransmissionObject transmissionObj;
     private MeshRenderer meshRenderer;
-    public MeshRenderer childRenderer;
+    //public MeshRenderer childRenderer;
     private TrailRenderer trailRenderer;
     private LineRenderer lineRenderer;
     private float t = 0;
@@ -24,7 +24,7 @@ public class transmissionColorB : MonoBehaviour
     {
         transmissionObj = GetComponent<TransmissionObject>();
         meshRenderer = GetComponent<MeshRenderer>();
-        childRenderer.enabled = false;
+        //childRenderer.enabled = false;
         trailRenderer = GetComponent<TrailRenderer>();
         lineRenderer = GetComponent<LineRenderer>();
         currentMaterial = "Instantiated";
@@ -53,11 +53,11 @@ public class transmissionColorB : MonoBehaviour
                 {
                     meshRenderer.material = focus;
                 }
-                if (childRenderer)
-                {
-                    childRenderer.material = focus;
-                    childRenderer.enabled = true;
-                }
+                //if (childRenderer)
+                //{
+                //    childRenderer.material = focus;
+                //    childRenderer.enabled = true;
+                //}
                 if (trailRenderer)
                 {
                     trailRenderer.material = focus;
@@ -74,11 +74,11 @@ public class transmissionColorB : MonoBehaviour
                 {
                     meshRenderer.material = fix;
                 }
-                if (childRenderer)
-                {
-                    childRenderer.material = fix;
-                    childRenderer.enabled = true;
-                }
+                //if (childRenderer)
+                //{
+                //    childRenderer.material = fix;
+                //    childRenderer.enabled = true;
+                //}
                 if (trailRenderer)
                 {
                     trailRenderer.material = fix;
@@ -98,11 +98,11 @@ public class transmissionColorB : MonoBehaviour
             {
                 meshRenderer.material = changingC;
             }
-            if (childRenderer)
-            {
-                childRenderer.material = changingC;
-                childRenderer.enabled = false;
-            }
+            //if (childRenderer)
+            //{
+            //    childRenderer.material = changingC;
+            //    childRenderer.enabled = false;
+            //}
             if (trailRenderer)
             {
                 trailRenderer.material = changingC;

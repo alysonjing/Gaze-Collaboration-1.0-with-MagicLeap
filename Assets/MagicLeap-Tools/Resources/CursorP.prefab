@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1570605519519914425
 Transform:
   m_ObjectHideFlags: 0
@@ -224,7 +224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59be44fc8ff11a43907c758da5b3aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  childRenderer: {fileID: 7837556338128606854}
   Laser: 0
   startingC: {fileID: 2100000, guid: 8d8749a17c02da444bd0516b45deda3a, type: 2}
   changingC: {fileID: 2100000, guid: ed8978828d3e5a649a81cad78379ac82, type: 2}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 217925906538496950}
   m_Layer: 5
   m_Name: HeadP
-  m_TagString: gazePointer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

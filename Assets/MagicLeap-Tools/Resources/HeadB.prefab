@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 217925906538496950}
   m_Layer: 5
   m_Name: HeadB
-  m_TagString: gazePointer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   ownershipLocked: 0
   resourceFileName: 
   creator: 
-  guid: 
+  guid: 2c3b09c8-32d3-41eb-b539-f1b2f4b1fc8a
   localPosition: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0, w: 0}
   targetScale: {x: 0, y: 0, z: 0}

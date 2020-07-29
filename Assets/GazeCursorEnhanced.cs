@@ -16,6 +16,7 @@ public class GazeCursorEnhanced : MonoBehaviour
     public float smoothing = 10;
     public Vector3 offset;
     public float offsetPos;
+    public csvWriter debug;
 
     Vector3 filterd = new Vector3();
     int bufferIndex = 0;
@@ -104,6 +105,7 @@ public class GazeCursorEnhanced : MonoBehaviour
         }
 
         _spawned.Clear();
+        debug.writeToFile();
     }
 
     public void SendFixation()
@@ -169,7 +171,6 @@ public class GazeCursorEnhanced : MonoBehaviour
             output += "Localized: " + SpatialAlignment.Localized;
             output += " |B : " + transmissionColorB.currentMaterial; //debug Blue
             output += " |P : " + transmissionColor.currentMaterial; //debug Pink
-
             info.text = output;
             //end 
         }
